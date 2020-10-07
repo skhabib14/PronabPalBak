@@ -1,0 +1,214 @@
+﻿@model PronabPal.Models.SpotModel
+@{
+    ViewBag.Title = "add";
+    Layout = "~/Views/Shared/_LayoutAfterDashboardView.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-sm-12 col-xs-12">
+
+        <h2 style="margin: 0; text-align: center;"><span>Add Spot</span>
+            @*<a href="@Url.Action("index", "flow", new { id = Model.FlowId })" class="read-more-link pull-right"><i class="fa fa-chevron-left"></i>&nbsp;Back</a>*@
+        </h2>
+
+
+        @using (Html.BeginForm("add", "spot", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="spot-details-message">
+                @if (TempData.Count > 0)
+                {
+                    if (TempData["error"] != null && !string.IsNullOrWhiteSpace(TempData["error"].ToString()))
+                    {
+                    <div class="alert alert-danger fade in" style="margin-top: 15px;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["error"]
+                    </div>
+                    }
+                }
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>Spot Name  <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(model => model.SpotName, new { @class = "form-control", @placeholder = "Enter Spot Name", @required = "true" })
+                                <span style="color: red">@Html.ValidationMessageFor(model => model.SpotName)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label>Spot Type  <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(model => model.SpotType, new SelectList(
+                                     new List<Object> { new { value = "Answer", text = "Answer" }, new { value = "Question", text = "Question" } , 
+                                         new { value = "Observation", text = "Observation" }
+                                      }, "value", "text", 0), "--Selete Category Type--", new { @class = "form-control", @required = "true" })
+                                <span style="color: red">@Html.ValidationMessageFor(model => model.SpotType)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label>Spot Category </label>
+                                @Html.DropDownListFor(model => model.CategoryId, (IEnumerable<SelectListItem>)ViewBag.Categorylist, "-- Select Category--", new { @class = "form-control" })
+                                <span style="color: red">@Html.ValidationMessageFor(model => model.CategoryId)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label>Flow </label>
+                                @Html.DropDownListFor(model => model.DictumId, (IEnumerable<SelectListItem>)ViewBag.Dictumlist, "-- Select Flow--", new { @class = "form-control" })
+                                <span style="color: red">@Html.ValidationMessageFor(model => model.DictumId)</span>
+                            </div>
+                        </div>
+
+                        @*<div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>Category <span>*</span></label>
+                                @Html.DropDownListFor(model => model.Category, (IEnumerable<SelectListItem>)ViewBag.Categorylist, "-- Select Category--", new { @class = "form-control", @required = "true" })
+                                <span style="color: red">@Html.ValidationMessageFor(model => model.Category)</span>
+                            </div>
+                        </div>*@
+
+
+                        @*<div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>Short Description <span style="color: red">*</span></label>
+                                @Html.TextAreaFor(model => model.ShortDescription, new { @rows = "2", @class = "form-control", @placeholder = "Enter Short Description ", @required = "true" })
+                                <span style="color: red">@Html.ValidationMessageFor(model => model.ShortDescription)</span>
+                            </div>
+                        </div>*@
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>Description </label>
+                                @Html.TextAreaFor(model => model.Description, new { id = "editor", @rows = "6", @class = "form-control", @placeholder = "Enter Description " })
+                                <span style="color: red">@Html.ValidationMessageFor(model => model.Description)</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <div class="form-group">
+                                <label>Canvas Sketch</label>
+                                <div class="demo">
+                                    <canvas id="simple_sketch" style="width: 100%; height: 200px; border: 1px solid #ccc;"></canvas>
+                                    <input type="button" name="clear" value="Clear" onclick="clearCanvas(canvas, ctx);" />
+                                </div>
+                                <input type="hidden" name="CanvasSketch" id="CanvasSketch" />
+                                <span style="color: red">@Html.ValidationMessageFor(model => model.CanvasSketch)</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label>Image</label>
+                                <div class="user-pic">
+                                    <img id="thumbnil" style="height:150px;max-width:100%;" src="@Url.Content("~/Content/AdminTheme/themes/supr/img/-text.png")">
+                                    <div class="clearfix">&nbsp;</div>
+                                    <div class="form-group">
+                                        <input name="ImageData" id="ImageData" class="form-control" accept="/image.*/" onchange="showMyImage(this)" type="file">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+                                <input type="submit" value="Submit" onclick="return CheckCanvas();">
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a href="@Url.Action("list","spot")" class="btn btn-danger ml10">Cancel</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+
+
+<script>
+    function checkFileExtension(elem) {
+        var filePath = elem.value;
+
+        if (filePath.indexOf('.') == -1)
+            return false;
+
+        var validExtensions = new Array();
+        var ext = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
+
+        validExtensions[0] = 'jpg';
+        validExtensions[1] = 'jpeg';
+        validExtensions[2] = 'bmp';
+        validExtensions[3] = 'png';
+
+        for (var i = 0; i < validExtensions.length; i++) {
+            if (ext == validExtensions[i])
+                return true;
+        }
+
+
+        alert('The file extension ' + ext.toUpperCase() + ' is not allowed!');
+        elem.value = null;
+        return false;
+    }
+
+    function showMyImage(fileInput) {
+
+        if (checkFileExtension(fileInput) == true) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+                var img = document.getElementById("thumbnil");
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function (aImg) {
+                    return function (e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+</script>
+
+
+@*<script type="text/javascript">
+
+    function FillWithFlowNoData() {
+        var FlowId = $('#FlowId').val();
+        //var SpotId = $('#SpotId').val();
+
+        $.ajax({
+            url: '@Url.Action("FillWithFlowNoData", "spot")',
+            type: 'POST',
+            data: { FlowId: FlowId },
+
+            success: function (data) {
+                if (data.Status == "OK") {
+                    $('#FlowNo').val(data.Fno);
+                }
+                else {
+                    $('#FlowNo').val('');
+                }
+            },
+            error: function (req, status, error) {
+
+            },
+        });
+
+    }
+</script>*@

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        @if (TempData.Count > 0)
+        {
+            if (TempData["success"] != null && !string.IsNullOrWhiteSpace(TempData["success"].ToString()))
+            {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check alert-icon"></i><strong>Well done!</strong> @TempData["success"]
+            </div>
+            }
+            if (TempData["pwdsuccess"] != null && !string.IsNullOrWhiteSpace(TempData["pwdsuccess"].ToString()))
+            {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check alert-icon"></i><strong>Well done!</strong> @TempData["pwdsuccess"]
+            </div>
+            }
+        }
+    </div>
+</div>

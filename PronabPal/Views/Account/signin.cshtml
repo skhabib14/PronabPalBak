@@ -1,0 +1,121 @@
+﻿@model PronabPal.Models.SignUpModel
+
+@{
+    ViewBag.Title = "signin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    HttpCookie PronabPal_RememberMe_Cookies = Request.Cookies["PronabPal_RememberMe_Cookies"];
+    string userid = "", upwd = "", rememberme = "false";
+
+    if (PronabPal_RememberMe_Cookies != null)
+    {
+        if (PronabPal_RememberMe_Cookies["Email"] != null && PronabPal_RememberMe_Cookies["Pwd"] != null)
+        {
+            userid = PronabPal_RememberMe_Cookies["Email"].ToString();
+            upwd = PronabPal_RememberMe_Cookies["Pwd"].ToString();
+            rememberme = "true";
+        }
+
+    }
+}
+    <div class="pronaplefts01">
+       
+      <div class="logos01">
+        <a href="JavaScript:void(0)">
+          <img src="@Url.Content("~/Content/Home/image/logos01.png")" alt="Pronab Pal Space">
+        </a>
+        <h2>Sign in</h2>
+      </div>
+      <div class="clearfix"></div>
+        <div class="pronoforms01">
+             @if (TempData.Count > 0)
+                            {
+                                if (TempData["LogError"] != null && !string.IsNullOrWhiteSpace(TempData["LogError"].ToString()))
+                                {
+                                <div class="alert alert-danger fade in" style="margin-top: 15px;text-align: left;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width: auto;padding: 0;background: transparent;color: #000;">×</button>
+                                    <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["LogError"]
+                                </div>
+                                }
+                                if (TempData["Emailexists"] != null && !string.IsNullOrWhiteSpace(TempData["Emailexists"].ToString()))
+                                {
+                                <div class="alert alert-danger fade in" style="margin-top: 15px;text-align: left;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width: auto;padding: 0;background: transparent;color: #000;">×</button>
+                                    <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["Emailexists"]
+                                </div>
+                                }
+                                if (TempData["SignUpSuccess"] != null && !string.IsNullOrWhiteSpace(TempData["SignUpSuccess"].ToString()))
+                                {
+                                <div class="alert alert-success fade in" style="margin-top: 15px;text-align: left;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width: auto;padding: 0;background: transparent;color: #000;">×</button>
+                                    <i class="fa fa-check alert-icon"></i><strong>Success</strong> @TempData["SignUpSuccess"]
+                                </div>
+                                }
+                                if (TempData["EmailVerified"] != null && !string.IsNullOrWhiteSpace(TempData["EmailVerified"].ToString()))
+                                {
+                                <div class="alert alert-success fade in" style="margin-top: 15px;text-align: left;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width: auto;padding: 0;background: transparent;color: #000;">×</button>
+                                    <i class="fa fa-check alert-icon"></i><strong>Success</strong> @TempData["EmailVerified"]
+                                </div>
+                                }
+                                if (TempData["SignUpERROR"] != null && !string.IsNullOrWhiteSpace(TempData["SignUpERROR"].ToString()))
+                                {
+                                <div class="alert alert-danger fade in" style="margin-top: 15px;text-align: left;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width: auto;padding: 0;background: transparent;color: #000;">×</button>
+                                    <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["SignUpERROR"]
+                                </div>
+                                }
+                            }
+             @using (Html.BeginForm("signin", "account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+
+          <div class="row">
+            <div class="col-sm-12">
+              <p>Email<span>*</span></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <input type="email" class="input-text" id="EmailId" name="EmailId" placeholder="Enter Email*" required value="@userid">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <p>Password<span>*</span></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <input type="password" class="input-text" id="Password" name="Password" required placeholder="Enter Password*" value="@upwd">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="submit">Sign in</button>
+            </div>
+          </div>
+                 
+             }
+        </div>
+        <div class="clearfix"></div>
+        <div class="guideds01">
+          <ul>
+            <li>New to GuidedTrack? <a href="@Url.Action("ForgotPassword", "Account")" style="float: right;">Forgot password</a></li>
+            <li><a href="@Url.Action("signup","Account")"">Create an account</a></li>
+          </ul>
+          <p>By creating an account you are agreeing to our <a href="JavaScript:void(0)">Terms of Service</a> and <a href="JavaScript:void(0)">Privacy Policy</a></p>
+        </div>      
+    </div>
+      <div class="pronoprights01">
+      <img src="@Url.Content("~/Content/Home/image/rightimgs01.png")" alt="Pronab Pal Space">
+      <div class="abotexts01">
+        @*<h2>Pronab Pal Space Better.</h2>
+        <h3>Succeed Together.</h3>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen.</p>*@
+          <h2>@ViewBag.PageHeadingSignin</h2>
+          @Html.Raw(ViewBag.PageContentSignin)
+      </div>
+    </div>
+ 
+
+  

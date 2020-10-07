@@ -1,0 +1,100 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = "dashboard";
+    Layout = "~/Views/Shared/_LayoutAfterDashboardView.cshtml";
+
+    DataTable dt = new DataTable();
+    DataSet ds = (DataSet)ViewBag.userdtl;
+    if (ds != null && ds.Tables[0].Rows.Count > 0)
+    {
+        dt = ds.Tables[0];
+    }
+    
+}
+
+@if (TempData.Count > 0)
+{
+    if (TempData["editprofileSUCCESS"] != null && !string.IsNullOrWhiteSpace(TempData["editprofileSUCCESS"].ToString()))
+    {
+    <div class="alert alert-success fade in" style="margin-top: 15px;">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <i class="fa fa-check alert-icon"></i><strong>Success</strong> @TempData["editprofileSUCCESS"]
+    </div>
+    }
+}
+
+<div class="row">
+
+    <div class="col-sm-4 col-xs-12">
+        <div class="user-edit">
+            <div class="user-pic">
+                @if (!string.IsNullOrEmpty(dt.Rows[0]["ProfileImage"].ToString()))
+                {
+                    <img src="@Url.Content("~/Images/Profile/" + @dt.Rows[0]["ProfileImage"].ToString())"  style="height:232px;width:232px;">
+                }
+                else
+                {
+                    <img src="@Url.Content("~/Content/avatar.png")"  style="height:232px;width:232px;">
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-8 col-xs-12">
+        <div class="spot-details-message">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2><span>Profile</span></h2>
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td><strong>First Name</strong></td>
+                                <td>@if (!string.IsNullOrEmpty(dt.Rows[0]["FirstName"].ToString()))
+                                    {
+                                    @dt.Rows[0]["FirstName"].ToString()
+                                    }
+                                    else
+                                    {
+                                    }</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Last Name</strong></td>
+                                <td>@if (!string.IsNullOrEmpty(dt.Rows[0]["LastName"].ToString()))
+                                    {
+                                    @dt.Rows[0]["LastName"].ToString()
+                                    }
+                                    else
+                                    {
+
+                                    }</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email</strong></td>
+                                <td>@if (!string.IsNullOrEmpty(dt.Rows[0]["EmailId"].ToString()))
+                                    {
+                                    @dt.Rows[0]["EmailId"].ToString()
+                                    }
+                                    else
+                                    {
+
+                                    }</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contact No</strong></td>
+                                <td>@if (!string.IsNullOrEmpty(dt.Rows[0]["Phone"].ToString()))
+                                    {
+                                    @dt.Rows[0]["Phone"].ToString()
+                                    }
+                                    else
+                                    {
+
+                                    }</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="signwrap01">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="topsign01">
+            <ul>
+              <li><a href="@Url.Action("signin","Account")">Sign in</a></li>
+              <li><a href="@Url.Action("signup","Account")"">Sign up</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="logos02">
+            <img src="@Url.Content("~/Content/Home/image/logos01.png")" alt="Pronab Pal Space">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="signupsubre01">
+            <ul>
+              <li>
+                <input class="required" id="SubscriberName" name="Name" placeholder="Email" value="" type="text">
+              </li>
+              <li><button type="submit">Subscribe</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="signupsubre02">
+            <p>Sign up for the PronabPalSpace mailing list, and be one of the first to try it out!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="aboutpros01">
+            <h2>@ViewBag.PageHeadingAbout</h2>@*<h2>About pronab pal space</h2>*@
+              @Html.Raw(ViewBag.PageContentAbout)
+            @*<p>Pronabpal.space is a site supporting the need and communication around research projects and consulting.  
+               We carry on R&amp;D work in various technology categories like AI, Concurrency, Big Data, IOT.</p>
+            <ul>
+              <li><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl,</p></li>
+              <li><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl,</p></li>
+              <li><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl,</p></li>
+              <li><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl,</p></li>
+              <li><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl,</p></li>
+            </ul>*@
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="aboutpros01">
+            @*<h2>EASY TO LEARN</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen.</p>*@
+              <h2>@ViewBag.PageHeadingETL</h2>
+              @Html.Raw(ViewBag.PageContentETL)
+
+            @*<h2>Research Category</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen.</p>*@
+              <h2>@ViewBag.PageHeadingResearchCat</h2>
+              @Html.Raw(ViewBag.PageContentResearchCat)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

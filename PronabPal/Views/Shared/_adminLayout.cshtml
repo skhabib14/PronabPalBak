@@ -1,0 +1,174 @@
+﻿@using Class;
+@{
+    Layout = null;
+    HttpCookie PronabPal_login_Cookies_Admin = Request.Cookies["PronabPal_login_Cookies_Admin"];
+    if (PronabPal_login_Cookies_Admin == null)
+    {
+        Response.Redirect(Url.Action("Index", "Portal"));
+    }
+    
+    adminDataLayer dl = new adminDataLayer();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard | Pronab Pal</title>
+    <!-- Mobile specific metas -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <!-- Force IE9 to render in normal mode -->
+    <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="application-name" content="">
+    <!-- Import google fonts - Heading first/ text second -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css">
+    <!-- Css files -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/AdminTheme/themes/supr/css/main.min.css")">
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="@Url.Content("~/Content/themes/images/favicon.png")">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="@Url.Content("~/Content/themes/images/favicon.png")">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="@Url.Content("~/Content/themes/images/favicon.png")">
+    <link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/themes/images/favicon.png")">
+    <link rel="icon" href="@Url.Content("~/Content/themes/images/favicon.png")" type="@Url.Content("~/Content/image/png")">
+    <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
+    <script>window.jQuery || document.write('<script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/libs/jquery-2.1.1.min.js")">\x3C/script>')</script>
+    <meta name="msapplication-TileColor" content="#3399cc">
+    
+    <!--[if lt IE 9]>
+  <script type="text/javascript" src="js/libs/excanvas.min.js"></script>
+  <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <script type="text/javascript" src="js/libs/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+    <div id="header">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index", "home")" target="_blank">
+                    <img src="@Url.Content("~/Content/Home/image/logos01.png")" style="height:60px;"/>
+                </a>
+            </div>
+            <div id="navbar-no-collapse" class="navbar-no-collapse">
+                <ul class="nav navbar-right usernav">
+                    <li class="dropdown">
+                        @if (PronabPal_login_Cookies_Admin != null)
+                        {
+                            if (PronabPal_login_Cookies_Admin["UserId"] != null)
+                            {
+                                System.Data.DataTable dt = dl.Inline_Process("Select * from dbo.AdminLogin_tbl where userId='" + PronabPal_login_Cookies_Admin["UserId"] + "'").Tables[0];
+                            <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
+
+                                @if (dt.Rows[0]["Photo"].ToString() != "")
+                                {
+                                    <img src="@Url.Content("~/Images/Admin/" + @dt.Rows[0]["Photo"].ToString())" alt="Profile" class="image">
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/Content/AdminTheme/themes/supr/img/-text.png")" alt="Profile" class="image">
+                                }
+
+                                <span class="txt">@(dt.Rows[0]["Name"].ToString() != "" ? dt.Rows[0]["Name"].ToString() : "")</span> <b class="caret"></b></a>
+                            }
+                        }
+                        else { Response.Redirect(Url.Action("Index", "Portal")); }
+                        <ul class="dropdown-menu right">
+                            <li class="menu">
+                                <ul>
+                                    <li><a href="@Url.Action("EditProfile", "Admin", new { @id = @PronabPal_login_Cookies_Admin["UserId"].ToString() })"><i class="s16 icomoon-icon-user-plus"></i>Edit profile</a></li>
+                                    <li><a href="@Url.Action("ChangePassword", "Admin")"><i class="fa fa-unlock-alt"></i>ChangePassword</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li><a href="@Url.Action("Logout", "Portal")"><i class="s16 icomoon-icon-exit"></i><span class="txt">Logout</span></a></li>
+                    @*<li><a href="~/"><span class="txt">Change Password</span></a></li>
+                    <li><a id="toggle-right-sidebar" href="#"><i class="s16 icomoon-icon-indent-increase"></i></a></li>*@
+                </ul>
+            </div>
+            <!-- /.nav-collapse -->
+        </nav>
+        <!-- /navbar -->
+    </div>
+
+
+    <div id="wrapper">
+
+        <div id="sidebarbg" class="hidden-lg hidden-md hidden-sm hidden-xs"></div>
+
+        <div id="sidebar" class="page-sidebar hidden-lg hidden-md hidden-sm hidden-xs">
+            @Html.Partial("_sidebar")
+        </div>
+
+
+        <div id="content" class="page-content clearfix">
+            @RenderBody()
+
+        </div>
+
+        <div id="footer" class="clearfix sidebar-page ">
+
+            <p class="pull-left">Copyrights &copy; 2018<a href="#" class="color-blue strong" target="_blank"> PronabPal</a>. All rights reserved.</p>
+            @*<p class="pull-right"><a href="#" class="mr5">Terms of use</a> | <a href="#" class="ml5 mr25">Privacy police</a></p>*@
+        </div>
+
+    </div>
+
+    <div id="back-to-top"><a href="#">Back to Top</a></div>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/core/pace/pace.min.js")"></script>
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/code.jquery.com/jquery-2.1.1.min.js")"></script>
+
+    @RenderSection("editor", required: false)
+
+    <@*script>window.jquery || document.write('<script src="@Url.Content("~/content/themes/supr/js/libs/jquery-2.1.1.min.js")">\x3c/script>')</script>*@
+    <script src="@Url.Content("~/content/AdminTheme/themes/supr/code.jquery.com/ui/1.10.4/jquery-ui.js")"></script>
+    <script>window.jQuery || document.write('<script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/libs/jquery-ui-1.10.4.min.js")">\x3C/script>')</script>
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/code.jquery.com/jquery-migrate-1.2.1.min.js")"></script>
+    <script>window.jQuery || document.write('<script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/libs/jquery-migrate-1.2.1.min.js")">\x3C/script>')</script>
+        
+    <!-- Bootstrap plugins -->
+    @*    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/bootstrap/bootstrap.js")"></script>*@
+    <!-- Core plugins ( not remove ) -->
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/libs/modernizr.custom.js")"></script>
+    <!-- Handle responsive view functions -->
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/jRespond.min.js")"></script>
+    <!-- Custom scroll for sidebars,tables and etc. -->
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/core/slimscroll/jquery.slimscroll.min.js")"></script>
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js")"></script>
+    <!-- Remove click delay in touch -->
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/core/fastclick/fastclick.js")"></script>
+    <!-- Increase jquery animation speed -->
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/core/velocity/jquery.velocity.min.js")"></script>
+    <!-- Quick search plugin (fast search for many widgets) -->
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/core/quicksearch/jquery.quicksearch.js")"></script>
+    <!-- Bootbox fast bootstrap modals -->
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/ui/bootbox/bootbox.js")"></script>
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/pages/modals.js")"></script>
+    @* <script src="@Url.Content("~/Content/js/pages/modals.js")"></script>*@
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/ckeditor/ckeditor.js")"></script>
+
+    @RenderSection("featured", required: false)
+
+    
+    <script type="text/javascript">
+        CKEDITOR.editorConfig = function (config) {
+            config.language = 'es';
+            config.uiColor = '#F7B42C';
+            config.height = 300;
+            config.toolbarCanCollapse = true;
+            allowedContent: true;
+            CKEDITOR.dtd.$removeEmpty['i'] = false;
+        };
+        CKEDITOR.replace('editor');
+    </script>
+
+
+</body>
+</html>

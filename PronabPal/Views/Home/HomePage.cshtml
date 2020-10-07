@@ -1,0 +1,196 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = "HomePage";
+    Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
+
+    DataSet ds = (DataSet)ViewBag.SliderListDb;
+    DataTable dt = new DataTable();
+    if (ds != null && ds.Tables[0].Rows.Count > 0)
+    {
+        dt = ds.Tables[0];
+    }
+}
+
+<section class="slider-sec">
+    @{
+        if (dt.Rows.Count == 0)
+        {
+        <h4 class="panel-title alert alert-info fade in" style="color: #F10404; text-align: center;">No result found.</h4>
+        }
+        else
+        {
+        <div class="owl-carousel owl-theme" id="slider">
+            @foreach (System.Data.DataRow dr in dt.Rows)
+            {
+                if (!string.IsNullOrWhiteSpace(dr["Slider_Image"].ToString()))
+                {
+                <div class="item">
+                    <img src="@Url.Content("~/Images/Slider/" + @dr["Slider_Image"])" alt="">
+                </div>
+                }
+            }
+
+            @*
+                <div class="item">
+                    <img src="@Url.Content("~/Content/AfterHome/images/banner1.jpg")">
+                </div>
+            <div class="item">
+                <img src="@Url.Content("~/Content/AfterHome/images/banner2.jpg")">
+            </div>*@
+        </div>
+        }
+    }
+</section>
+
+<section class="featured-spot-sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <h1 class="heading1">Featured Spot</h1>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="featured-spot-each">
+                            <div class="featured-spot-each-banner">
+                                <img src="@Url.Content("~/Content/AfterHome/images/bn1.jpg")">
+                            </div>
+                            <div class="featured-spot-each-content">
+                                <h2>Spot Street</h2>
+                                <p>
+                                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical 
+									Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at 
+									Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable 
+									source.
+                                </p>
+                                <a href="" class="readmore2">Read More <i class="fas fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="featured-spot-each">
+                            <div class="featured-spot-each-banner">
+                                <img src="@Url.Content("~/Content/AfterHome/images/bn2.jpg")">
+                            </div>
+                            <div class="featured-spot-each-content">
+                                <h2>Spot Street</h2>
+                                <p>
+                                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical 
+									looked up one of the more obscure Latin words, consectetur, from a Lorem 
+									Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable 
+									source.
+                                </p>
+                                <a href="" class="readmore2">Read More <i class="fas fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="current-spot">
+                    <div class="current-spot-header">
+                        <h3>Current Spot</h3>
+                    </div>
+                    <div class="current-spot-body">
+                        <ul>
+                            <li>
+                                <span class="spot-date"><i class="far fa-clock solid"></i>December 26, 2017</span>
+                                <h3><a href="">It is a long established fact that a reader</a></h3>
+                            </li>
+                            <li>
+                                <span class="spot-date"><i class="far fa-clock"></i>December 26, 2017</span>
+                                <h3><a href="">It is a long established fact that a reader</a></h3>
+                            </li>
+                            <li>
+                                <span class="spot-date"><i class="far fa-clock"></i>December 26, 2017</span>
+                                <h3><a href="">It is a long established fact that a reader</a></h3>
+                            </li>
+                            <li>
+                                <span class="spot-date"><i class="far fa-clock"></i>January 05, 2018</span>
+                                <h3><a href="">It is a long established fact that a reader</a></h3>
+                            </li>
+                        </ul>
+                        <a href="" class="readmore">Read More <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="homeabout-section">
+    <div class="container">
+        <div class="homeabout-content">
+            <div class="con-text">
+            </div>
+            <div class="con-text">
+                <h3 class="heading1">About us</h3>
+                <h4>It is a long established fact that a reader will be distracted by the readable content</h4>
+                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+                <ul class="social-share-about">
+                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                    <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                    <li><a href=""><i class="fab fa-youtube"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="recent-post-section">
+    <div class="container">
+        <h3 class="heading1">Recent Spot</h3>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="featured-spot-each">
+                    <div class="featured-spot-each-banner">
+                        <img src="@Url.Content("~/Content/AfterHome/images/bn3.jpg")">
+                    </div>
+                    <div class="featured-spot-each-content">
+                        <h2>Spot Street</h2>
+                        <p>
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical 
+							Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at 
+							Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable 
+							source.
+                        </p>
+                        <a href="" class="readmore2">Read More <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="featured-spot-each">
+                    <div class="featured-spot-each-banner">
+                        <img src="@Url.Content("~/Content/AfterHome/images/bn4.jpg")">
+                    </div>
+                    <div class="featured-spot-each-content">
+                        <h2>Spot Street</h2>
+                        <p>
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical 
+							looked up one of the more obscure Latin words, consectetur, from a Lorem 
+							Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable 
+							source.
+                        </p>
+                        <a href="" class="readmore2">Read More <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="featured-spot-each">
+                    <div class="featured-spot-each-banner">
+                        <img src="@Url.Content("~/Content/AfterHome/images/bn5.jpg")">
+                    </div>
+                    <div class="featured-spot-each-content">
+                        <h2>Spot Street</h2>
+                        <p>
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical 
+							looked up one of the more obscure Latin words, consectetur, from a Lorem 
+							Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable 
+							source.
+                        </p>
+                        <a href="" class="readmore2">Read More <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

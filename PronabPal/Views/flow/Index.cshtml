@@ -1,0 +1,147 @@
+﻿@using System.Data;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
+
+    DataSet ds = (DataSet)ViewBag.SpotListDb;
+    DataTable Sdt = new DataTable();
+    if (ds != null && ds.Tables[0].Rows.Count > 0)
+    {
+        Sdt = ds.Tables[0];
+    }
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="current-spot-sec">
+                    <div class="current-spot-head">
+                        <h3>Current Spot</h3>
+                    </div>
+                    <div class="current-spot-all">
+                        <div class="owl-carousel owl-theme" id="current-spot">
+                            <div class="item">
+                                @if (Sdt.Rows.Count > 0)
+                                {
+                                    <ul class="all-spots">
+                                        @foreach (System.Data.DataRow dr2 in Sdt.Rows)
+                                        {                                           
+                                            <li>
+                                                <div class="spot-img">
+                                                    @if (!string.IsNullOrEmpty(dr2["SpotImage"].ToString()))
+                                                    {
+                                                        <a onclick="showspot('@dr2["Spot_Id"]','@dr2["Dictum_ID"]')" href="javascript:void(0)">
+                                                            <img src="@Url.Content("~/Images/Spot/" + dr2["SpotImage"].ToString())" class="img-responsive" alt="Spot Image" />
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a onclick="showspot('@dr2["Spot_Id"]','@dr2["Dictum_ID"]')" href="javascript:void(0)">
+                                                            <img src="@Url.Content("~/Content/AdminTheme/themes/supr/img/-text.png")" class="img-responsive" alt="Spot Image"/>
+                                                        </a>
+                                                    }
+                                                </div>
+                                                <div class="spot-right-content">
+                                                    <h3><a onclick="showspot('@dr2["Spot_Id"]','@dr2["Dictum_ID"]')" href="javascript:void(0)">@(dr2["Spot_Name"].ToString() != "" ? dr2["Spot_Name"].ToString() : "")</a></h3>
+                                                    <div class="shateto">
+                                                        <p>Share to <b class="pull-right">Position: @dr2["Element_ID"].ToString()</b></p>
+                                                        <span>
+                                                            <img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></span>
+                                                        <span>
+                                                            <img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></span>
+                                                        <span>
+                                                            <img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></span>
+                                                        <span>
+                                                            <img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></span>
+                                                        <span>
+                                                            <img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></span>
+                                                        @*<ul>
+                                                            <li><a href="">
+                                                                <img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+                                                            <li><a href="">
+                                                                <img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+                                                            <li><a href="">
+                                                                <img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+                                                            <li><a href="">
+                                                                <img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+                                                            <li><a href="">
+                                                                <img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></li>
+                                                        </ul>*@
+                                                    </div>
+                                                    <div class="ratings">
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="total-rev">(15)</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <h3 style="color: red">Data Not Found.</h3> 
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="spot-of-day">
+                    <div class="spot-of-day-head">
+                        <h3>About Flow</h3>
+                    </div>
+                    <div class="spot-user-sec">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="spot-user-content">
+                                    @{string Flowname=ViewBag.FlowTitle;}
+                                    <h2>@Flowname.Replace("_"," ")</h2>
+                                    <p><strong>Flow Id: @ViewBag.FlowId</strong></p>
+                                    <p>@ViewBag.FlowDescription</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="allspots-sec">
+                    <div class="allspots-head">
+                        <h3>Spots</h3>
+                    </div>
+                    <div class="row">
+                        <div id="spotdetails" class="col-md-12 col-sm-12">
+                            @Html.Partial("_partialspotdetails")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+    function showspot(spotid, flowid) {
+        $('#loader').show();
+        $.ajax({
+            url: '@Url.Action("spotdetailsbyid", "flow")',
+            type: 'POST',
+            data: { spotid: spotid, flowid: flowid },
+            success: function (data) {
+                $("#spotdetails").html(data);
+                $('#loader').hide();
+            },
+            error: function (req, status, error) {
+                //  alert("R: " + req + " S: " + status + " E: " + error);
+            },
+        });
+    }
+</script>

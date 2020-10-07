@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "page_edit";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="contentwrapper">
+    @using (Html.BeginForm("page_edit", "cms", FormMethod.Post, new { enctype = "multipart/form-data", novalidate = true }))
+    {
+        <div class="heading">
+            <!--  .heading-->
+
+            <h3>Update @ViewBag.PageName</h3>
+
+            <div class="resBtnSearch">
+                <a href="#"><span class="s16 icomoon-icon-search-3"></span></a>
+            </div>
+        </div>
+
+        <!-- Start .row -->
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="panel panel-default  panelMove  ">
+                    <!-- Start .panel -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Update
+                        @if (!string.IsNullOrEmpty(@ViewBag.Section))
+                        {
+                            @ViewBag.PageName <span>of</span>@ViewBag.Section
+                        }
+                        else
+                        {
+                            @ViewBag.PageName
+                        }
+                        </h4>
+                    </div>
+
+                    <div class="panel-body pt0 pb0">
+                        @if (!string.IsNullOrEmpty((string)ViewBag.CMSErrorMSG))
+                        {
+                            <div class="alert alert-danger fade in">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <i class="glyphicon glyphicon-ban-circle alert-icon"></i>
+                                @ViewBag.CMSErrorMSG
+                            </div>
+                        }
+                        <form class="form-horizontal group-border stripped" method="post" enctype="multipart/form-data">
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label class="col-lg-2 col-md-3 control-label">Page Name: </label>
+                                <div class="col-lg-10 col-md-10">
+                                    <input readonly="readonly" required name="page_name" type="text" value="@ViewBag.PageName"   class="form-control" />
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            @*<div class="form-group">
+                                <label class="col-lg-2 col-md-3 control-label">Meta Name: </label>
+                                <div class="col-lg-10 col-md-10">
+                                    <input  type="text" required name="Meta_Name" value="@ViewBag.MetaName"   class="form-control" />
+                                </div>
+                            </div>
+                            <br />
+                            <br /> 
+                            <div class="form-group">
+                                <label class="col-lg-2 col-md-3 control-label">Meta Description: </label>
+                                <div class="col-lg-10 col-md-10">
+                                    <input  type="text" required name="Meta_Description" value="@ViewBag.MetaDescription"   class="form-control" />
+                                </div>
+                            </div>
+                            <br />
+                            <br /> *@
+                            <div class="form-group">
+                                <label class="col-lg-2 col-md-3 control-label">Page Title: </label>
+                                <div class="col-lg-10 col-md-10">
+                                    <input  type="text" required name="page_title" value="@ViewBag.PageTitle"   class="form-control" />
+                                </div>
+                            </div>
+                            <br />
+                            <br />  
+                           @* <div class="form-group">
+                                <label class="col-lg-2 col-md-3 control-label">Page Section: </label>
+                                <div class="col-lg-10 col-md-10">
+                                    <input  type="text" required name="page_Section" value="@ViewBag.Section" class="form-control" />
+                                </div>
+                            </div>
+                            <br />
+                            <br />*@   
+                            <div class="form-group">
+                                <label class="col-lg-2 col-md-3 control-label">Page Heading: </label>
+                                <div class="col-lg-10 col-md-10">
+                                    <input required type="text" name="page_heading" value="@ViewBag.PageHeading" class="form-control" />
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label class="col-lg-2 col-md-3 control-label">Description: </label>
+                                <div class="col-lg-10 col-md-10">                                    
+                                    @*<textarea required class="form-control", rows = "10",  id="summernote" name="page_desc">@ViewBag.Desc</textarea>*@
+                                    <textarea required class="form-control", rows = "10", id="editor" name="page_desc">@Html.Raw(ViewBag.Desc)</textarea>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <div class="col-lg-12 col-md-12 text-center">
+                                    <br />
+                                    <br />
+                                    <button type="submit" class="btn btn-primary mr5 mb10" onclick="f()">Update</button>
+                                    <a href="@Url.Action("pages", "cms")" class="btn btn-primary mr5 mb10">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- col-lg-12 end here -->
+
+        </div>
+   
+    }
+</div>
+
+
+@*@section featured
+{
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/charts/sparklines/jquery.sparkline.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/fancyselect/fancySelect.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/select2/select2.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/maskedinput/jquery.maskedinput.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/dual-list-box/jquery.bootstrap-duallistbox.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/spinner/jquery.bootstrap-touchspin.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/bootstrap-datepicker/bootstrap-datepicker.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/bootstrap-timepicker/bootstrap-timepicker.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/bootstrap-colorpicker/bootstrap-colorpicker.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/bootstrap-tagsinput/bootstrap-tagsinput.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/libs/typeahead.bundle.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/summernote/summernote.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/bootstrap-markdown/bootstrap-markdown.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/plugins/forms/dropzone/dropzone.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/jquery.supr.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/main.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/pages/forms-advanced.js")"></script>
+}*@

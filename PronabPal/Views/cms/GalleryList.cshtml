@@ -1,0 +1,120 @@
+﻿@using Class;
+@using System.Data;
+@{
+    ViewBag.Title = "GalleryList";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+
+    long TotalPage = (long)ViewBag.TotalPage;
+    long CurrPage = (long)ViewBag.CurrentPage;
+    DataSet ds = (DataSet)ViewBag.GalleryList;
+    DataTable dt = new DataTable();
+    if (ds != null && ds.Tables[0].Rows.Count > 0)
+    {
+        dt = ds.Tables[0];
+    }
+}
+
+
+<div class="contentwrapper">
+    <!--Content wrapper-->
+    <div class="heading">
+        <!--  .heading-->
+        <h3>Gallery Manager</h3>
+        <div class="resBtnSearch"><a href="#"><span class="s16 icomoon-icon-search-3"></span></a></div>
+    </div>
+    <div class="panel-body">
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 sortable-layout">
+            <div class="panel panel-default">
+
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">Add new Image</h4>
+                </div>
+                <div class="panel-body">
+                    <a href="@Url.Action("Gallery","CMS")" class="btn btn-success ml10">Add New <i class="icon-plus"></i> </a>
+                </div>
+            </div>
+            <!-- End .panel -->
+        </div>
+    </div>
+
+    <div class="row">
+        
+         <div class="col-lg-12">
+            <div class="panel panel-default">                           
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">Search by title</h4>
+                </div>     
+                <div class="panel-body">                    
+         <div class="col-lg-4" style="float: left;">
+                        @using (Html.BeginForm("GalleryList", "CMS", FormMethod.Post))
+                        { 
+                            <div class="input-group custom-search-form">
+                               <input type="text" name="Search" value="@ViewBag.Search" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        }
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+        <div class="col-lg-12">
+            <!-- col-lg-12 start here -->
+            <div class="panel panel-default">
+                <h4 style="color:green">@Html.Raw(TempData["Msg"]) </h4>
+                <div class="panel-heading">
+                    <h4 class="panel-title">List of gallery images </h4>
+                </div>
+                
+                <div class="panel-body">
+                   @{                  
+                   if (dt.Rows.Count == 0)
+                    {
+                        <h4 class="panel-title alert alert-info fade in" style="color: #F10404; text-align: center;">No result found.</h4>
+                    }
+                       foreach (System.Data.DataRow drp in dt.Rows)
+                                {
+                                <div class="col-lg-4 col-md-4">
+                                    <!-- col-lg-4 start here -->
+                                    <div class="panel panel-default" id="supr2">
+                                        <!-- Start .panel -->
+                                        <div class="panel-heading">                                          
+                                        <h4 style="padding-top: 5px;" onclick="return ConfirmationDelete()"><i class="fa fa-trash"></i>&nbsp;@Html.ActionLink("Remove", "deleteImage/"+drp["GalleryId"], "CMS")</h4> 
+                                        </div>
+                                        <div class="panel-body">
+                                           <a href="@Url.Content("~/Images/gallery/"+@drp["Image"])"><img src="@Url.Content("~/Images/gallery/"+@drp["Image"])" style="max-width:100%;" /></a> 
+                                           
+                                        <div class="text-center">  
+                                            <h5 style="border-top: 1px solid #555;">@drp["Title"]</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                     
+                                 }
+                   }
+                   
+                </div>
+            </div>
+            <!-- End .panel -->
+        </div>
+        <!-- col-lg-12 end here -->
+    </div>
+    <!-- End .row -->
+</div>
+
+<script type="text/javascript">
+    function ConfirmationDelete() {
+        if (confirm("Are you sure you want to remove?") == false) {
+            return false;
+        }
+    }
+</script>

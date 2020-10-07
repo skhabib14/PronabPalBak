@@ -1,0 +1,106 @@
+
+
+
+body { color: #000; font-size: 14px; font-weight: 400; font-family: 'Roboto', sans-serif;}
+
+ul,h1,h2,h3,h4,h5,h6,p { margin: 0px; padding: 0px;}
+ul li { list-style: none;}
+a { outline: none; text-decoration: none; transition: .5s;}
+.fa { transition: .5s;}
+img { max-width: 100%; height: auto;}
+
+.padding-lefts01 { padding-left: 5px;}
+.padding-rights01 { padding-right: 5px;}
+.padding-alls01 { padding-left: 5px; padding-right: 5px;}
+
+.wrapalls01 { width: 100%; height: 100%; overflow: hidden;}
+.pronaplefts01 { width: 60%; float: left; margin: 30px 0px 20px; text-align: center;}
+.logos01 { width: 100%; float: left; text-align: center;}
+.logos01 img { margin: 0 auto 10px; display: block;}
+.logos01 h2 { font-size: 24px; font-weight: 300; border-bottom: 1px solid #22a7f0;
+ padding: 5px 10px 5px; text-transform: uppercase; display: inline-block;}
+
+.logos02 { width: 100%; float: left; text-align: center;}
+.logos02 img { margin: 0 auto 20px; display: block;}
+
+.pronoforms01 { width: 71%; padding: 10px 0px 10px; border-bottom: 1px solid #22a7f0; 
+	margin: 20px auto 0px;}
+.pronoforms01 p { font-size: 16px; font-weight: 300; text-align: left; padding-bottom: 5px;}
+.pronoforms01 p span { color: #11a0f0; }
+.pronoforms01 input { width: 100%; border: 1px solid #CCC; background: #FFF; margin: 0 0 15px; padding: 5px; color: #000;}
+.pronoforms01 input:focus { outline: 0; border: 1px solid #999;}
+.pronoforms01 button { cursor: pointer; width: 100%; border: none; font-weight: 300;
+    color: #FFF; margin: 0 0 5px; padding: 5px; font-size: 20px; transition: .5s;
+    background: #014b92; text-transform: uppercase; display: block; border-radius: 5px;}
+ .pronoforms01 button:hover { background: #000;}
+
+.guideds01 { width: 71%; margin: 0px auto 10px; text-align: center;}
+.guideds01 ul { padding: 10px 0px 15px;}
+.guideds01 ul li { font-size: 16px; font-weight: 300; padding-bottom: 10px;}
+.guideds01 ul li:nth-child(2) { border:1px solid #a9b2b0; padding: 5px;}
+.guideds01 p { font-size: 16px; font-weight: 300;}
+.guideds01 p a { color: #0099ee;}
+
+.pronoprights01 { width: 40%; float: left; position: relative; overflow: hidden;}
+.pronoprights01 img { width: 100%;}
+.pronoprights01 .abotexts01 { position: absolute; top: 30%; left: 20px; width: 80%; 
+	padding: 10px 0px 10px 50px; color: #fff;}
+.pronoprights01 .abotexts01 h2 { font-size: 26px; font-weight: 500; text-align: left; padding-bottom: 10px;}
+.pronoprights01 .abotexts01 h3 { font-size: 26px; font-weight: 500; text-align: left; padding-bottom: 10px;}
+.pronoprights01 .abotexts01 p { font-size: 16px; font-weight: 300; text-align: left; padding-bottom: 5px;}
+
+.topsign01 { width: 100%; float: left; padding: 20px 0px 10px; margin-bottom: 50px;}
+.topsign01 ul { float: right;}
+.topsign01 ul li { float: left; margin-left: 5px;}
+.topsign01 ul li a { font-size: 16px; font-weight: 300; color: #000; transition: .5s; text-decoration: none; padding: 5px 10px 7px;}
+.topsign01 ul li a:hover {}
+.topsign01 ul li:nth-child(2) a { background: #014b92; border-radius: 5px; color: #fff;}
+.topsign01 ul li:nth-child(2) a:hover { background: #000;}
+
+.signupsubre01 { width: 30%; padding: 20px 0px 10px; margin: 0 auto 30px;}
+.signupsubre01 ul { float: left; width: 100%; padding-bottom: 15px;}
+.signupsubre01 ul li { float: left;}
+.signupsubre01 ul li:nth-child(1) { width: 70%;}
+.signupsubre01 ul li:nth-child(2) { width: 30%;}
+.signupsubre01 ul li input { width: 100%; border: 1px solid #939f9c; background: #FFF; margin: 0 0 15px; padding: 5px; color: #000; height: 40px; transition: .5s;}
+.signupsubre01 ul li input:focus { outline: 0; border: 1px solid #000;}
+.signupsubre01 ul li button { cursor: pointer; border: none; font-weight: 300;
+    color: #000; margin: 0 0 5px; padding: 5px; font-size: 20px; transition: .5s;
+    background: #fff; text-transform: uppercase; border-radius: 0px; height: 40px;
+   border: 1px solid #939f9c; border-left: 0px;}
+.signupsubre01 ul li button:hover { background: #0099ee; color: #fff;}
+
+.signupsubre02 { width: 100%; float: left;}
+.signupsubre02 p { font-size: 16px; font-weight: 300; text-align: left; padding-bottom: 30px;
+  color: #000; text-align: center;}
+
+.aboutpros01 { width: 100%; float: left;}
+.aboutpros01 h2 { font-size: 24px; font-weight: 300; border-bottom: 1px solid #22a7f0;
+ padding: 5px 0px 15px 0px; text-transform: uppercase; display: block; margin-bottom: 10px;}
+.aboutpros01 p { font-size: 16px; font-weight: 300; text-align: left; padding-bottom: 10px;}
+.aboutpros01 ul {}
+.aboutpros01 ul li { list-style: disc; color: #0099ef; padding:1px 1px 5px 10px; margin-left: 14px;}
+.aboutpros01 ul li p { font-size: 16px; font-weight: 300; color: #000;}
+
+.signwrap01 { width: 100%; float: left; position: relative; overflow: hidden; padding-bottom: 20px;}
+.signwrap01 .chats01 {}
+
+
+/*============================== Media Query Start Here ============================*/
+
+@media only screen and (max-width: 767px) {
+
+ 
+}
+
+@media only screen and (min-width: 1499px) and (max-width: 1799px){
+ 
+  }
+
+@media only screen and (min-width: 1800px){ 
+
+
+}
+
+
+/*==================================================== Media Query End Here =======================================*/

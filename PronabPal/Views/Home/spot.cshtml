@@ -1,0 +1,500 @@
+﻿@{
+    ViewBag.Title = "spot";
+    Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
+}
+
+<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<div class="spot-of-day">
+						<div class="spot-of-day-head">
+							<h3>Spot of the day</h3>
+						</div>
+						<div class="spot-user-sec">
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<img src="@Url.Content("~/Content/AfterHome/images/pic.jpg")">
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="spot-user-content">
+										<h2>Jon Doe</h2>
+										<p><strong>Spot No: 097</strong></p>
+										<p><strong>Spot ID: A097</strong></p>
+										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
+										industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
+										scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap 
+										into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the 
+										release of Letraset sheets containing Lorem Ipsum passages</p>
+										<a href="#" class="read-more-link">Read More <i class="fas fa-chevron-right"></i></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="allspots-sec">
+						<div class="allspots-head">
+							<h3>Spot</h3>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<p><img src="@Url.Content("~/Content/AfterHome/images/spot.jpg")"></p>
+								<h2>Spot 1</h2>
+								<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<p>Spot No: 098</p>
+									</div>
+									<div class="col-md-6 col-sm-6 text-right">
+										<p>Spot No: B098</p>
+									</div>
+								</div>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
+								industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
+								scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap 
+								into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the 
+								release of Letraset sheets containing Lorem Ipsum passages</p>
+								<a href="#" class="read-more-link">Read More <i class="fas fa-chevron-right"></i></i></a>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="all-sspot-sscroll">
+									<div class="owl-carousel owl-theme" id="spot-all">
+										<div class="item">
+											<ul class="alspots">
+												<li>
+													<div class="all-spots-img">
+														<img src="@Url.Content("~/Content/AfterHome/images/sp1.jpg")">
+													</div>
+													<div class="all-spots-content">
+														<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+														<div class="spotstime">
+															<p>	21 hours ago / <span>3 Share</span></p>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="all-spots-img">
+														<img src="@Url.Content("~/Content/AfterHome/images/sp2.jpg")">
+													</div>
+													<div class="all-spots-content">
+														<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+														<div class="spotstime">
+															<p>	21 hours ago / <span>3 Share</span></p>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="all-spots-img">
+														<img src="@Url.Content("~/Content/AfterHome/images/sp3.jpg")">
+													</div>
+													<div class="all-spots-content">
+														<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+														<div class="spotstime">
+															<p>	21 hours ago / <span>3 Share</span></p>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="all-spots-img">
+														<img src="@Url.Content("~/Content/AfterHome/images/sp1.jpg")">
+													</div>
+													<div class="all-spots-content">
+														<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+														<div class="spotstime">
+															<p>	21 hours ago / <span>3 Share</span></p>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="item">
+											<ul class="alspots">
+												<li>
+													<div class="all-spots-img">
+														<img src="@Url.Content("~/Content/AfterHome/images/sp1.jpg")">
+													</div>
+													<div class="all-spots-content">
+														<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+														<div class="spotstime">
+															<p>	21 hours ago / <span>3 Share</span></p>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="all-spots-img">
+														<img src="@Url.Content("~/Content/AfterHome/images/sp2.jpg")">
+													</div>
+													<div class="all-spots-content">
+														<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+														<div class="spotstime">
+															<p>	21 hours ago / <span>3 Share</span></p>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="all-spots-img">
+														<img src="@Url.Content("~/Content/AfterHome/images/sp3.jpg")">
+													</div>
+													<div class="all-spots-content">
+														<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+														<div class="spotstime">
+															<p>	21 hours ago / <span>3 Share</span></p>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="all-spots-img">
+														<img src="@Url.Content("~/Content/AfterHome/images/sp1.jpg")">
+													</div>
+													<div class="all-spots-content">
+														<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+														<div class="spotstime">
+															<p>	21 hours ago / <span>3 Share</span></p>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<div class="current-spot-sec">
+						<div class="current-spot-head">
+							<h3>Current Spot</h3>
+						</div>
+						<div class="current-spot-all" >
+							<div class="owl-carousel owl-theme" id="current-spot">
+								<div class="item">
+									<ul class="all-spots">
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/sp2.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/sp1.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/sp2.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/sp3.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/bn3.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/bn4.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										
+									</ul>
+								</div>
+								<div class="item">
+									<ul class="all-spots">
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/sp1.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/bn1.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/sp2.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/sp3.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/bn3.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="spot-img">
+												<a href="@Url.Action("spotdetails","Home")"><img src="@Url.Content("~/Content/AfterHome/images/bn4.jpg")"></a>
+											</div>
+											<div class="spot-right-content">
+												<h3><a href="@Url.Action("spotdetails","Home")">It is a long established fact that</a></h3>
+												<div class="shateto">
+													<p>Share to</p>
+													<ul>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+														<li><a href=""><img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></a></li>
+													</ul>
+												</div>
+												<div class="ratings">
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star checked"></span>
+													<span class="fa fa-star"></span>
+													<span class="fa fa-star"></span>
+													<span class="total-rev">(15)</span>
+												</div>
+											</div>
+										</li>
+										
+									</ul>
+								</div>
+							</div>
+							
+						</div>
+						<a href="#" class="more-btn-full">More</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>

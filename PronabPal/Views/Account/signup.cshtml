@@ -1,0 +1,253 @@
+﻿@model PronabPal.Models.SignUpModel
+@{
+    ViewBag.Title = "signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    HttpCookie PronabPal_RememberMe_Cookies = Request.Cookies["PronabPal_RememberMe_Cookies"];
+    string userid = "", upwd = "", rememberme = "false";
+
+    if (PronabPal_RememberMe_Cookies != null)
+    {
+        if (PronabPal_RememberMe_Cookies["Email"] != null && PronabPal_RememberMe_Cookies["Pwd"] != null)
+        {
+            userid = PronabPal_RememberMe_Cookies["Email"].ToString();
+            upwd = PronabPal_RememberMe_Cookies["Pwd"].ToString();
+            rememberme = "true";
+        }
+
+    }
+}
+
+<!-- ============================= Left Part Start Here ============================== -->
+    <div class="pronaplefts01">
+       
+      <div class="logos01">
+        <a href="JavaScript:void(0)">
+          <img src="@Url.Content("~/Content/Home/image/logos01.png")" alt="Pronab Pal Space">
+        </a>
+        <h2>Create account</h2>
+      </div>
+      <div class="clearfix"></div>
+        <div class="pronoforms01">
+             @if (TempData.Count > 0)
+                            {
+                                if (TempData["LogError"] != null && !string.IsNullOrWhiteSpace(TempData["LogError"].ToString()))
+                                {
+                                <div class="alert alert-danger fade in" style="margin-top: 15px;text-align: left;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width: auto;padding: 0;background: transparent;color: #000;">×</button>
+                                    <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["LogError"]
+                                </div>
+                                }
+                                if (TempData["Emailexists"] != null && !string.IsNullOrWhiteSpace(TempData["Emailexists"].ToString()))
+                                {
+                                <div class="alert alert-danger fade in" style="margin-top: 15px;text-align: left;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width: auto;padding: 0;background: transparent;color: #000;">×</button>
+                                    <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["Emailexists"]
+                                </div>
+                                }
+                                if (TempData["SignUpSuccess"] != null && !string.IsNullOrWhiteSpace(TempData["SignUpSuccess"].ToString()))
+                                {
+                                <div class="alert alert-success fade in" style="margin-top: 15px;text-align: left;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width: auto;padding: 0;background: transparent;color: #000;">×</button>
+                                    <i class="fa fa-check alert-icon"></i><strong>Success</strong> @TempData["SignUpSuccess"]
+                                </div>
+                                }
+                                if (TempData["EmailVerified"] != null && !string.IsNullOrWhiteSpace(TempData["EmailVerified"].ToString()))
+                                {
+                                <div class="alert alert-success fade in" style="margin-top: 15px;text-align: left;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width: auto;padding: 0;background: transparent;color: #000;">×</button>
+                                    <i class="fa fa-check alert-icon"></i><strong>Success</strong> @TempData["EmailVerified"]
+                                </div>
+                                }
+                                if (TempData["SignUpERROR"] != null && !string.IsNullOrWhiteSpace(TempData["SignUpERROR"].ToString()))
+                                {
+                                <div class="alert alert-danger fade in" style="margin-top: 15px;text-align: left;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="width: auto;padding: 0;background: transparent;color: #000;">×</button>
+                                    <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["SignUpERROR"]
+                                </div>
+                                }
+                            }
+             @using (Html.BeginForm("signup", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+          <div class="row">
+            <div class="col-sm-6">
+              <p>First Name<span>*</span></p>
+            </div>
+            <div class="col-sm-6">
+              <p>Last Name<span>*</span></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              @Html.TextBoxFor(model => model.FirstName, new { @class = "input-text", @placeholder = "Enter First Name * ", @required = "true" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.FirstName)</span>
+            </div>
+            <div class="col-sm-6">
+              @Html.TextBoxFor(model => model.LastName, new { @class = "input-text", @placeholder = "Enter Last Name * ", @required = "true" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.LastName)</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Email<span>*</span></p>
+            </div>
+            <div class="col-sm-6">
+              <p>Contact<span>*</span></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              @Html.TextBoxFor(model => model.EmailId, new { @class = "input-text", @placeholder = "Enter Email Id * ", @required = "true" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.EmailId)</span>
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.Phone, new { @class = "input-text", @placeholder = "Enter Phone No. * ", @required = "true", @pattern = ".{10,15}", @title = "Enter your Phone No. min 10 number and max 15 number", @onkeypress = "return isNumber(event,this);", @maxlength = "15" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.Phone)</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Password<span>*</span></p>
+            </div>
+            <div class="col-sm-6">
+              <p>Confirm Password<span>*</span></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+             @Html.PasswordFor(model => model.Password, new { @class = "input-text", @placeholder = "Enter Password * ", @required = "true" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.Password)</span>
+            </div>
+            <div class="col-sm-6">
+              @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "input-text", @placeholder = "Enter Confirm Password * ", @required = "true" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.ConfirmPassword)</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+                @Html.HiddenFor(model => model.Lat)
+                                    @Html.HiddenFor(model => model.Lng)
+              <button type="submit">Sign in</button>
+            </div>
+          </div>
+                 
+             }
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="guideds01">
+          <ul>
+            <li>Already have an account?</li>
+            <li><a href="@Url.Action("signin", "account")" title="">Sign in</a></li>
+          </ul>
+          <p>By creating an account you are agreeing to our <a href="JavaScript:void(0)">Terms of Service</a> and <a href="JavaScript:void(0)">Privacy Policy</a></p>
+        </div>      
+    </div>
+    <div class="pronoprights01">
+      <img src="@Url.Content("~/Content/Home/image/rightimgs02.png")" alt="Pronab Pal Space">
+      <div class="abotexts01">
+         @*<h2>Pronab Pal Space Better.</h2>
+        <h3>Succeed Together.</h3>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen.</p>*@
+          <h2>@ViewBag.PageHeadingSignUp</h2>
+          @Html.Raw(ViewBag.PageContentSignUp)
+      </div>
+    </div>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDF8I_evWUUrTskNcc6UhNmxjiEbAdLyhc&v=3.exp&signed_in=true&libraries=places"></script>
+<script type="text/javascript">
+    //var placeSearch, autocomplete;
+    //var componentForm = {
+    //    //street_number: 'short_name',
+    //    //route: 'long_name',
+    //    // locality: 'long_name',
+    //    administrative_area_level_2: 'long_name',
+    //    administrative_area_level_1: 'long_name',
+    //    country: 'long_name',
+    //    postal_code: 'short_name'
+    //};
+
+
+
+    google.maps.event.addDomListener(window, 'load', function () {
+        //===========================Source==========================
+        var places = new google.maps.places.Autocomplete(document.getElementById('Address'));
+        google.maps.event.addListener(places, 'place_changed', function () {
+            var place = places.getPlace();
+            var address = place.formatted_address;
+            var value = address.split(",");
+            count = value.length;
+            country = value[count - 1];
+            state = value[count - 2];
+            city = value[count - 3];
+            var z = state.split(" ");
+            //document.getElementById("Country").value = country;
+            var i = z.length;
+            //document.getElementById("City").value = city;
+            var latitude = place.geometry.location.lat();
+            var longitude = place.geometry.location.lng();
+            var mesg = address;
+            document.getElementById("Address").value = mesg;
+            var lati = latitude;
+            console.log(lati);
+            console.log(longi);
+            document.getElementById("Lat").value = lati;
+            var longi = longitude;
+            document.getElementById("Lng").value = longi;
+            //GetAddress(lati, longi, 'FromPostCode');
+
+            console.log(place.address_components);
+            //for (var i = 0; i < place.address_components.length; i++) {
+            //    var addressType = place.address_components[i].types[0];
+
+            //    if (componentForm[addressType]) {
+            //        var val = place.address_components[i][componentForm[addressType]];
+            //        document.getElementById(addressType).value = val;
+            //    }
+            //}
+
+        });
+        //============================Destination========================
+
+    });
+</script>
+<script>
+    function isNumber(evt, element) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (
+
+            (charCode != 46 || $(element).val().indexOf('.') != 1) &&      // “.” CHECK DOT, AND ONLY ONE.
+            (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+</script>
+
+<script type="text/javascript">
+    function setvalue(d) {
+        var x = d.checked;
+        if (x) {
+            document.getElementById('RememberMe').value = true;
+
+        }
+        else {
+            document.getElementById('RememberMe').value = false;
+        }
+    }
+    $(document).ready(function () {
+        var r = $('#RememberMe').val();
+        //alert(r);
+        if (r == "true") {
+            $("#login_remember").attr("checked", true);
+        }
+        else {
+            $("#login_remember").attr("checked", false);
+        }
+    })
+</script>
+  
+
+  

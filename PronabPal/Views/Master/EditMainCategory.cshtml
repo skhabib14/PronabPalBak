@@ -1,0 +1,119 @@
+﻿@model PronabPal.Models.MasterModel.Maincategory
+@{
+    ViewBag.Title = "EditMainCategory";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+
+}
+<div class="contentwrapper">
+    <div class="heading">
+        <h3>Edit Category</h3>
+        <div class="resBtnSearch"><a href="#"><span class="s16 icomoon-icon-search-3"></span></a></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 sortable-layout">
+            <div class="panel panel-default plain  panelMove  ">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Edit Category </h4>
+                </div>
+                <div class="panel-body">
+                    <form class="form-inline" role="form" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <label class="col-md-12">Category Name <span style="color: red;">*</span></label>
+                                @Html.HiddenFor(model=>model.Image)
+                                @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control", @placeholder = "Category Name*", @required = "true", @style = "width: 314px;" })
+                                <p class="errormsg" style="color: #E80F0D;">@Html.ValidationMessageFor(model => model.CategoryName)</p>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="col-md-8">
+                                    <label class="col-md-12">Category Image</label>
+                                    <input type="file" name="ImageData" class="form-control" id="ImageData" onchange="showMyImage(this)">
+                                </div>
+                                <div class="col-md-4 mt20">
+                                    <img id="thumbnil" src="@Url.Content("~/Images/Category/"+Model.Image)" class="img-responsive">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-success ml10" style="margin-top: 21px">Submit</button>
+                                <a href="@Url.Action("MainCategory", "Master")" class="btn btn-primary mr5 " style="margin-top:21px">Cancel</a>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+                @if (TempData.Count > 0)
+                {
+                    if (TempData["EditCategoryError"] != null && !string.IsNullOrWhiteSpace(TempData["EditCategoryError"].ToString()))
+                    {
+                    <div class="alert alert-danger fade in">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["EditCategoryError"]
+                    </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    function checkFileExtension(elem) {
+        var filePath = elem.value;
+
+
+        if (filePath.indexOf('.') == -1)
+            return false;
+
+
+        var validExtensions = new Array();
+        var ext = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
+
+
+        validExtensions[0] = 'jpg';
+        validExtensions[1] = 'jpeg';
+        validExtensions[2] = 'bmp';
+        validExtensions[3] = 'png';
+        validExtensions[4] = 'gif';
+
+
+
+        for (var i = 0; i < validExtensions.length; i++) {
+            if (ext == validExtensions[i])
+                return true;
+        }
+
+
+        alert('The file extension ' + ext.toUpperCase() + ' is not allowed!');
+        elem.value = null;
+        return false;
+    }
+
+
+    function showMyImage(fileInput) {
+
+        if (checkFileExtension(fileInput) == true) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+                var img = document.getElementById("thumbnil");
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function (aImg) {
+                    return function (e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+
+</script>

@@ -1,0 +1,236 @@
+﻿@using System.Data;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
+
+    //long TotalPage = (long)ViewBag.TotalPage;
+    //long CurrPage = (long)ViewBag.CurrentPage;ViewBag.SpotDetailsDb 
+    DataSet ds = (DataSet)ViewBag.SpotListDb;
+    DataTable dt = new DataTable();
+    if (ds != null && ds.Tables[0].Rows.Count > 0)
+    {
+        dt = ds.Tables[0];
+    }
+
+    DataSet ds2 = (DataSet)ViewBag.SpotDetailsDb;
+    DataTable dt2 = new DataTable();
+    if (ds2 != null && ds2.Tables[0].Rows.Count > 0)
+    {
+        dt2 = ds2.Tables[0];
+    }
+}
+
+@*<div class="header-bottom">
+    <div class="container">
+        <div class="head-left-sec">
+            @Html.DropDownList("Search", (IEnumerable<SelectListItem>)ViewBag.Dictumlist, "-- Select Flow--", new { @class = "form-control selectpicker" })
+        </div>
+        <div class="head-right-sec">
+            <ul>
+                <li>
+                    <input type="search" class="form-control" placeholder="Search"><input type="submit"></li>
+                <li>
+                    <button class="follow-btn">Follows</button></li>
+                <li>
+                    <button class="tag-btn">Tags</button></li>
+            </ul>
+        </div>
+    </div>
+</div>*@
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="spot-of-day">
+                    <div class="spot-of-day-head">
+                        <h3>Spot of the day</h3>
+                    </div>
+
+                    <div class="spot-user-sec">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <img src="@Url.Content(ViewBag.SpotCanvasSketch)">
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="spot-user-content">
+                                    <h2>@ViewBag.SpotName</h2>
+                                    <p><strong>Spot ID: @ViewBag.SpotId</strong> <span class="pull-right">@ViewBag.EntryDate</span></p>
+                                    <p><strong>Position: @ViewBag.FlowNo</strong></p>
+                                    <p><strong>Flow Name: @ViewBag.Phrase</strong></p>
+                                    <p>@Html.Raw(ViewBag.SpotDescription)</p>
+                                    <a href="@Url.Action("details", "spot", new { id = ViewBag.SpotId })" class="read-more-link">Read More <i class="fas fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="allspots-sec">
+                    <div class="allspots-head">
+                        <h3>Spot</h3>
+                    </div>
+                    <div class="row">
+
+                        <div id="spotdetails" class="col-md-7 col-sm-7">
+
+                            @Html.Partial("_partialspotdetails")
+
+                            @*<p>
+                                <img src="@Url.Content("~/Content/AfterHome/images/spot.jpg")"></p>
+                            <h2>Spot 1</h2>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <p>Spot No: 098</p>
+                                </div>
+                                <div class="col-md-6 col-sm-6 text-right">
+                                    <p>Spot No: B098</p>
+                                </div>
+                            </div>
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
+								industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
+								scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap 
+								into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the 
+								release of Letraset sheets containing Lorem Ipsum passages
+                            </p>
+                            <a href="#" class="read-more-link">Read More <i class="fas fa-chevron-right"></i></a>*@
+                        </div>
+
+                        <div class="col-md-5 col-sm-5">
+                            <div class="all-sspot-sscroll">
+                                <div class="owl-carousel owl-theme" id="spot-all">
+                                    <div class="item">
+                                        @if (dt.Rows.Count > 0)
+                                        {
+                                            <ul class="alspots">
+                                                @foreach (System.Data.DataRow dr in dt.Rows)
+                                                {
+                                                    <li>
+                                                        <div class="all-spots-img">
+                                                            @if (!string.IsNullOrEmpty(dr["SpotImage"].ToString()))
+                                                            {
+                                                                <img src="@Url.Content("~/Images/Spot/" + dr["SpotImage"].ToString())" class="img-responsive" alt="Spot Image" />                                                     
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="@Url.Content("~/Content/AdminTheme/themes/supr/img/-text.png")" class="img-responsive" alt="Spot Image"/>
+                                                            }
+                                                        </div>
+                                                        <div class="all-spots-content">
+                                                            <h3><a href="javascript:void(0)" onclick="showspot('@dr["Spot_Id"]')">@(dr["Spot_Name"].ToString() != "" ? dr["Spot_Name"].ToString() : "")</a></h3>
+                                                            <div class="spotstime">
+                                                                <p>@(dr["Spot_Type"].ToString() != "" ? dr["Spot_Type"].ToString() : "") / <span>Position: @(dr["Element_ID"].ToString() != "" ? dr["Element_ID"].ToString() : "")</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="current-spot-sec">
+                    <div class="current-spot-head">
+                        <h3>Current Spot</h3>
+                    </div>
+                    <div class="current-spot-all">
+                        <div class="owl-carousel owl-theme" id="current-spot">
+                            <div class="item">
+                                @if (dt.Rows.Count > 0)
+                                {
+                                    <ul class="all-spots">
+                                        @foreach (System.Data.DataRow dr2 in dt.Rows)
+                                        {                                           
+                                            <li>
+                                                <div class="spot-img">
+                                                    @if (!string.IsNullOrEmpty(dr2["SpotImage"].ToString()))
+                                                    {
+                                                        <a href="@Url.Action("details", "spot", new { id = dr2["Spot_Id"].ToString() })">
+                                                            <img src="@Url.Content("~/Images/Spot/" + dr2["SpotImage"].ToString())" class="img-responsive" alt="Spot Image" />
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="@Url.Action("details", "spot", new { id = dr2["Spot_Id"].ToString() })">
+                                                            <img src="@Url.Content("~/Content/AdminTheme/themes/supr/img/-text.png")" class="img-responsive" alt="Spot Image"/>
+                                                        </a>
+                                                    }
+                                                </div>
+                                                <div class="spot-right-content">
+                                                    <h3><a href="@Url.Action("details", "spot", new { id = dr2["Spot_Id"].ToString() })">@(dr2["Spot_Name"].ToString() != "" ? dr2["Spot_Name"].ToString() : "")</a></h3>
+                                                    <div class="shateto">
+                                                        <p>Share to</p>
+                                                        <span>
+                                                            <img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></span>
+                                                        <span>
+                                                            <img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></span>
+                                                        <span>
+                                                            <img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></span>
+                                                        <span>
+                                                            <img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></span>
+                                                        <span>
+                                                            <img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></span>
+                                                        @*<ul>
+                                                            <li><a href="">
+                                                                <img src="@Url.Content("~/Content/AfterHome/images/facebook.png")"></a></li>
+                                                            <li><a href="">
+                                                                <img src="@Url.Content("~/Content/AfterHome/images/twitter.png")"></a></li>
+                                                            <li><a href="">
+                                                                <img src="@Url.Content("~/Content/AfterHome/images/insta.png")"></a></li>
+                                                            <li><a href="">
+                                                                <img src="@Url.Content("~/Content/AfterHome/images/linkedin.png")"></a></li>
+                                                            <li><a href="">
+                                                                <img src="@Url.Content("~/Content/AfterHome/images/youtube.png")"></li>
+                                                        </ul>*@
+                                                    </div>
+                                                    <div class="ratings">
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="total-rev">(15)</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    @*<a href="#" class="more-btn-full">More</a>*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+    function showspot(spotid) {
+        $('#loader').show();
+        $.ajax({
+            url: '@Url.Action("spotdetailsbyid", "spot")',
+            type: 'POST',
+            data: { spotid: spotid },
+            success: function (data) {
+                $("#spotdetails").html(data);
+                $('#loader').hide();
+            },
+            error: function (req, status, error) {
+                //  alert("R: " + req + " S: " + status + " E: " + error);
+            },
+        });
+    }
+</script>

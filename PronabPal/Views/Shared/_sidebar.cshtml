@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.pagename = Request.RequestContext.RouteData.Values["controller"].ToString();
+    ViewBag.viewname = Request.RequestContext.RouteData.Values["action"].ToString();
+}
+
+<div class="">
+    <div class="sidebar-scrollarea">
+        <div class="sidenav">
+            <div class="sidebar-widget mb0">
+                <h6 class="title mb0">Navigation</h6>
+            </div>
+            <div class="mainnav">
+                <ul>
+                    <li><a href="@Url.Action("Dashboard", "Portal")"><i class="s16 icomoon-icon-screen-2"></i><span class="txt">Dashboard</span></a> </li>
+                     
+                     <li class='@if (ViewBag.pagename == "Master")
+                               {@Html.Raw("highlight-menu")}'><a class="@if (ViewBag.pagename == "Master")
+                                                                        {@Html.Raw("expand")}" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i><span class="txt">Master</span></a>
+                        <ul class="sub @if (ViewBag.pagename == "Master")
+                                       {@Html.Raw("show")}">
+                            
+                            <li><a class="@if ((ViewBag.viewname == "MainCategory"))
+                                          {@Html.Raw("active")}"  href="@Url.Action("MainCategory", "Master")"><i class="s16 icomoon-icon-arrow-right-3"></i><span class="txt">Category</span></a></li>
+
+                        </ul>
+                    </li>
+                                       
+                     <li class='@if (ViewBag.pagename == "Admin")
+                               {@Html.Raw("highlight-menu")}'><a class="@if (ViewBag.pagename == "Admin")
+                               {@Html.Raw("expand")}" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i><span class="txt">Slider</span></a>
+                        <ul class="sub @if (ViewBag.pagename == "Admin")
+                                       {@Html.Raw("show")}">
+                            
+                            <li><a class="@if ((ViewBag.viewname == "AddSlider"))
+                                          {@Html.Raw("active")}"  href="@Url.Action("AddSlider", "Admin")"><i class="s16 icomoon-icon-arrow-right-3"></i>
+                                <span class="txt">Add</span></a></li>
+                            <li><a class="@if ((ViewBag.viewname == "SliderList"))
+                                          {@Html.Raw("active")}"  href="@Url.Action("SliderList", "Admin")"><i class="s16 icomoon-icon-arrow-right-3"></i>
+                                <span class="txt">List</span></a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class='@if (ViewBag.pagename == "CMS")
+                               {@Html.Raw("highlight-menu")}'><a class="@if (ViewBag.pagename == "CMS")
+                                                                        {@Html.Raw("expand")}" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i><span class="txt">CMS</span></a>
+                        <ul class="sub @if (ViewBag.pagename == "CMS")
+                                       {@Html.Raw("show")}">
+
+                            <li><a class="@if ((ViewBag.viewname == "Pages"))
+                                          {@Html.Raw("active")}"  href="@Url.Action("Pages", "CMS")">
+                                <i class="s16 icomoon-icon-arrow-right-3"></i><span class="txt">Pages</span></a></li>
+                            
+                            <li><a class="@if ((ViewBag.viewname == "Gallery"))
+                                          {@Html.Raw("active")}"  href="@Url.Action("Gallery", "CMS")">
+                                <i class="s16 icomoon-icon-arrow-right-3"></i><span class="txt">Add Gallery</span></a></li>
+                            
+                            <li><a class="@if ((ViewBag.viewname == "GalleryList"))
+                                          {@Html.Raw("active")}"  href="@Url.Action("GalleryList", "CMS")">
+                                <i class="s16 icomoon-icon-arrow-right-3"></i><span class="txt">Gallery List</span></a></li>
+
+
+                        </ul>
+                    </li>
+
+                     <li class='@if (ViewBag.pagename == "SEO")
+                               {@Html.Raw("highlight-menu")}'><a class="@if (ViewBag.pagename == "SEO")
+                                                                        {@Html.Raw("expand")}" href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i><span class="txt">SEO</span></a>
+                        <ul class="sub @if (ViewBag.pagename == "SEO")
+                                       {@Html.Raw("show")}">
+                            
+                            <li><a class="@if ((ViewBag.viewname == "List"))
+                                          {@Html.Raw("active")}"  href="@Url.Action("List", "SEO")"><i class="s16 icomoon-icon-arrow-right-3"></i><span class="txt">List</span></a></li>
+
+                        </ul>
+                    </li>
+                    
+                    <li class='@if (ViewBag.pagename == "Social")
+                               {@Html.Raw("highlight-menu")}'><a class="@if (ViewBag.pagename == "Social")
+                                                                        {@Html.Raw("expand")}" href="#">
+                                   <i class="fa fa-share-square-o" aria-hidden="true"></i><span class="txt">Social</span></a>
+                        <ul class="sub @if (ViewBag.pagename == "Social")
+                                       {@Html.Raw("show")}">
+                            <li><a class="@if ((ViewBag.viewname == "Link"))
+                                          {@Html.Raw("active")}"  href="@Url.Action("Link", "Social")"><i class="s16 icomoon-icon-arrow-right-3"></i><span class="txt">List</span></a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

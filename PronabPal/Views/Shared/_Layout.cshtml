@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pronab Pal Space</title>
+        
+    <link href="@Url.Content("~/Content/Home/css/bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/Home/css/font-awesome.css")" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="@Url.Content("~/Content/Home/css/jquery.bxslider.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/Home/css/style.css")" rel="stylesheet">
+  </head>
+    <body>
+        <div>
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        
+    </body>
+    <script src="@Url.Content("~/Content/Home/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Content/Home/js/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Content/Home/js/jquery.bxslider.js")"></script>
+    <script src="@Url.Content("~/Content/Home/js/myscript.js")"></script>
+</html>

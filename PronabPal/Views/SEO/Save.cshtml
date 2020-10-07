@@ -1,0 +1,119 @@
+﻿@model Models.AdminModels.SEOModel
+@{
+    ViewBag.Title = "Save";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="contentwrapper">
+
+    <div class="heading">
+        <h3>Add & Update SEO Data </h3>
+        <div class="resBtnSearch">
+            <a href="#"><span class="s16 icomoon-icon-search-3"></span></a>
+        </div>
+    </div>
+
+    <!-- Start .row -->
+    <div class="row">
+        <div class="col-lg-12">
+            @if (TempData.Count > 0)
+            {
+                if (!string.IsNullOrEmpty((string)TempData["SEOMSG"]))
+                    {
+                    <div class="alert alert-success fade in">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <i class="fa fa-check alert-icon"></i>
+                        <strong>Success!</strong> @TempData["SEOMSG"]
+                    </div>
+                    }
+                if (TempData["ErrorMSG"] != null && !string.IsNullOrWhiteSpace(TempData["ErrorMSG"].ToString()))
+                {
+                <div class="alert alert-danger fade in">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong>
+                    @TempData["ErrorMSG"]
+                </div>
+                }
+            }
+
+            <div class="panel panel-default">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">Add & Update SEO Data</h4>
+                </div>
+                <div class="panel-body pt0 pb0">
+
+                    <form class="form-horizontal group-border stripped" method="post" enctype="multipart/form-data">
+                        
+                        <div class="form-group">
+                            <div class="col-lg-6 col-md-6">
+                                @Html.LabelFor(model => model.PageName, new { @class = "col-lg-4 col-md-4 control-label" })
+                                <div class="col-lg-8 col-md-8">
+                                    @Html.DropDownListFor(model => model.PageName, new SelectList(
+                                     new List<Object> { new { value = "Home", text = "Home" }, 
+                                     new { value = "prematurelyagingroofsintexas", text = "Prematurely Aging Roofs In Texas" },new { value = "oursolution", text = "Our Solution" },
+                                     new { value = "roofinstallation", text = "Our New Roof Restoration & Preventive Repair Packages" }, new { value = "service", text = "Service" }  
+                                     , new { value = "contact", text = "Contact/About" } }, "value", "text", 0), "Select Page Name", new { @class = "form-control", @required = "true" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.PageName)</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                @Html.LabelFor(model => model.ViewName, new { @class = "col-lg-4 col-md-4 control-label" })
+                                  <div class="col-lg-8 col-md-8">
+                                    @Html.DropDownListFor(model => model.ViewName, new SelectList(
+                                     new List<Object> { new { value = "Index", text = "Index" } ,  
+                                     new { value = "prematurelyagingroofsintexas", text = "Prematurely Aging Roofs In Texas" },new { value = "oursolution", text = "Our Solution" },
+                                     new { value = "roofinstallation", text = "Our New Roof Restoration & Preventive Repair Packages" }, new { value = "service", text = "Service" } 
+                                     }, "value", "text", 0), "Select View Name", new { @class = "form-control", @required = "true" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.ViewName)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">                        
+                            <div class="col-md-12 col-sm-12">
+                                @Html.LabelFor(model => model.PageTitle, new { @class = "col-lg-12 col-md-12 control-label" })
+                                @Html.TextBoxFor(model => model.PageTitle, new { @rows="2", @class = "form-control", @placeholder = "Page Title"})
+                                <p class="errormsg" style="color: #E80F0D;">@Html.ValidationMessageFor(model => model.PageTitle)</p>
+                            </div>                     
+                            <div class="col-md-12 col-sm-12">
+                                @Html.LabelFor(model => model.MetaCanonical, new { @class = "col-lg-12 col-md-12 control-label" })
+                                @Html.TextAreaFor(model => model.MetaCanonical, new { @rows="2", @class = "form-control", @placeholder = "Canonical"})
+                                <p class="errormsg" style="color: #E80F0D;">@Html.ValidationMessageFor(model => model.MetaCanonical)</p>
+                            </div>                  
+                            <div class="col-md-12 col-sm-12">
+                                @Html.LabelFor(model => model.Description, new { @class = "col-lg-12 col-md-12 control-label" })
+                                @Html.TextAreaFor(model => model.Description, new { @rows="2", @class = "form-control", @placeholder = "Meta Description"})
+                                <p class="errormsg" style="color: #E80F0D;">@Html.ValidationMessageFor(model => model.Description)</p>
+                            </div>               
+                            <div class="col-md-12 col-sm-12">
+                                @Html.LabelFor(model => model.MetaRobots, new { @class = "col-lg-12 col-md-12 control-label" })
+                                @Html.TextBoxFor(model => model.MetaRobots, new {@class = "form-control", @placeholder = "Robots"})
+                                <p class="errormsg" style="color: #E80F0D;">@Html.ValidationMessageFor(model => model.MetaRobots)</p>
+                            </div>
+                                                    
+                            <div class="col-md-12 col-sm-12">
+                                @Html.LabelFor(model => model.google_site_verification, new { @class = "col-lg-12 col-md-12 control-label" })
+                                @Html.TextBoxFor(model => model.google_site_verification, new { @class = "form-control", @placeholder = "Google site verification"})
+                                <p class="errormsg" style="color: #E80F0D;">@Html.ValidationMessageFor(model => model.google_site_verification)</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-12 col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary mr5 mb10">Submit</button>
+                                <a href="@Url.Action("List", "SEO")" class="btn btn-warning mr5 mb10">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

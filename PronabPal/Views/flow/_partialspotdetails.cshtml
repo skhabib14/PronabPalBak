@@ -1,0 +1,91 @@
+﻿@using System.Data;
+@using Classes;
+@{    
+    AccountDataLayer dl = new AccountDataLayer();
+
+    DataSet ds = dl.Inline_Process("select * from dbo.[View_FlowspotList] where Dictum_ID='" + ViewBag.FlowId + "' and Spot_Id='" + ViewBag.SpotId + "'");
+    if (ds != null && ds.Tables[0].Rows.Count > 0)
+    {
+        ViewBag.SpotId = ds.Tables[0].Rows[0]["Spot_Id"].ToString() != "" ? ds.Tables[0].Rows[0]["Spot_Id"].ToString() : "";
+        ViewBag.FlowNo = ds.Tables[0].Rows[0]["Element_ID"].ToString() != "" ? ds.Tables[0].Rows[0]["Element_ID"].ToString() : "";
+        ViewBag.FlowTitle = ds.Tables[0].Rows[0]["Phrase"].ToString().Replace("_", " ") != "" ? ds.Tables[0].Rows[0]["Phrase"].ToString().Replace("_", " ") : "";
+        ViewBag.SpotType = ds.Tables[0].Rows[0]["Spot_Type"].ToString() != "" ? ds.Tables[0].Rows[0]["Spot_Type"].ToString() : "";
+        ViewBag.SpotName = ds.Tables[0].Rows[0]["Spot_Name"].ToString() != "" ? ds.Tables[0].Rows[0]["Spot_Name"].ToString() : "";
+        ViewBag.SpotDescription = ds.Tables[0].Rows[0]["SpotDesc"].ToString() != "" ? ds.Tables[0].Rows[0]["SpotDesc"].ToString() : "";
+
+        ViewBag.CanvasSketch = ds.Tables[0].Rows[0]["Canvas_Sketch"].ToString() != "" ? ds.Tables[0].Rows[0]["Canvas_Sketch"].ToString() : "";
+
+        if (ViewBag.CanvasSketch != null && ViewBag.CanvasSketch != "")
+        {
+            ViewBag.SpotCanvasSketch = "~/Images/Spot/" + ViewBag.CanvasSketch;
+        }
+        else
+        {
+            ViewBag.SpotCanvasSketch = "~/Content/AdminTheme/themes/supr/img/-text.png";
+        }
+
+        ViewBag.SpotImg = ds.Tables[0].Rows[0]["SpotImage"].ToString() != "" ? ds.Tables[0].Rows[0]["SpotImage"].ToString() : "";
+
+        if (ViewBag.SpotImg != null && ViewBag.SpotImg != "")
+        {
+            ViewBag.SpotImage = "~/Images/Spot/" + ViewBag.SpotImg;
+        }
+        else
+        {
+            ViewBag.SpotImage = "~/Content/AdminTheme/themes/supr/img/-text.png";
+        }
+    }
+}
+
+@if (ds.Tables[0].Rows.Count > 0)
+{
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h3>@ViewBag.SpotName</h3>
+            @*<h4>@ViewBag.FlowTitle</h4>*@
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="canvassketchbox">
+                <div class="col-md-5 col-sm-5">
+                    <p>
+                        <img src="@Url.Content(ViewBag.SpotImage)">
+                    </p>
+                </div>
+                <div class="col-md-7 col-sm-7">
+                    <p>
+                        <img src="@Url.Content(ViewBag.SpotCanvasSketch)">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <p>Spot Id: <b>@ViewBag.SpotId</b></p>
+        </div>
+        <div class="col-md-4 col-sm-6 text-center">
+            <p>Spot Type: <b>@ViewBag.SpotType</b></p>
+        </div>
+        <div class="col-md-4 col-sm-6 text-center">
+            <p>Position: <b>@ViewBag.FlowNo</b></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <p>@Html.Raw(ViewBag.SpotDescription)</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h3 style="color:red">Data Not Found.</h3>
+        </div>
+    </div>
+}

@@ -1,0 +1,58 @@
+﻿@using System.Data;
+@using Classes;
+@{    
+    AccountDataLayer dl = new AccountDataLayer();
+
+    DataSet ds = dl.Inline_Process("select * from dbo.[View_SpotList] where Spot_Id='" + ViewBag.SpotId + "'");
+    if (ds != null && ds.Tables[0].Rows.Count > 0)
+    {
+        ViewBag.SpotId = ds.Tables[0].Rows[0]["Spot_Id"].ToString() != "" ? ds.Tables[0].Rows[0]["Spot_Id"].ToString() : "";
+        ViewBag.FlowNo = ds.Tables[0].Rows[0]["Element_ID"].ToString() != "" ? ds.Tables[0].Rows[0]["Element_ID"].ToString() : "";
+        ViewBag.SpotType = ds.Tables[0].Rows[0]["Spot_Type"].ToString() != "" ? ds.Tables[0].Rows[0]["Spot_Type"].ToString() : "";
+        ViewBag.SpotName = ds.Tables[0].Rows[0]["Spot_Name"].ToString() != "" ? ds.Tables[0].Rows[0]["Spot_Name"].ToString() : "";
+        ViewBag.SpotDescription = ds.Tables[0].Rows[0]["Description"].ToString() != "" ? ds.Tables[0].Rows[0]["Description"].ToString() : "";
+        ViewBag.CanvasSketch = ds.Tables[0].Rows[0]["Canvas_Sketch"].ToString() != "" ? ds.Tables[0].Rows[0]["Canvas_Sketch"].ToString() : "";
+        ViewBag.SpotImage = ds.Tables[0].Rows[0]["SpotImage"].ToString() != "" ? ds.Tables[0].Rows[0]["SpotImage"].ToString() : "";
+
+        if (ViewBag.CanvasSketch != null && ViewBag.CanvasSketch != "")
+        {
+            ViewBag.SpotCanvasSketch = "~/Images/Spot/" + ViewBag.CanvasSketch;
+        }
+        else
+        {
+            if (ViewBag.SpotImage != null && ViewBag.SpotImage != "")
+            {
+                ViewBag.SpotCanvasSketch = "~/Images/Spot/" + ViewBag.SpotImage;
+            }
+            else
+            {
+                ViewBag.SpotCanvasSketch = "~/Content/AdminTheme/themes/supr/img/-text.png";
+            }
+        }
+
+    }
+    else
+    { ViewBag.SpotCanvasSketch = "asdadad"; }
+}
+
+<p>
+    <img src="@Url.Content(ViewBag.SpotCanvasSketch)">
+</p>
+
+<h3>@ViewBag.SpotName</h3>
+
+<div class="row">
+    <div class="col-md-4 col-sm-6">
+        <p>Spot Id: <b>@ViewBag.SpotId</b></p>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <p>Spot Type: <b>@ViewBag.SpotType</b></p>
+    </div>
+    <div class="col-md-3 col-sm-6 text-right">
+        <p>Position: <b>@ViewBag.FlowNo</b></p>
+    </div>
+</div>
+
+<p>@Html.Raw(ViewBag.SpotDescription)</p>
+
+<a href="@Url.Action("details", "spot", new {id=ViewBag.SpotId })" class="read-more-link">Read More <i class="fas fa-chevron-right"></i></a>

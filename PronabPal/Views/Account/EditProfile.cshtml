@@ -1,0 +1,131 @@
+﻿@model PronabPal.Models.ProfileEditModel
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared/_LayoutAfterDashboardView.cshtml";
+}
+
+<div class="row">
+    @using (Html.BeginForm("EditProfile", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="col-sm-4 col-xs-12">
+            <div class="user-edit">
+                <div class="user-pic">
+                    <img id="thumbnil" style="height:232px;width:232px;" src="@Url.Content(@ViewBag.imagee)">
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="form-group">
+                        <input name="ImageData" id="ImageData" class="form-control" accept="/image.*/" onchange="showMyImage(this)" type="file">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-xs-12">
+            <div class="spot-details-message">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <h2><span>Edit Details</span></h2>
+                        @if (TempData.Count > 0)
+                        {
+                            if (TempData["editprofileerror"] != null && !string.IsNullOrWhiteSpace(TempData["editprofileerror"].ToString()))
+                            {
+                            <div class="alert alert-danger fade in" style="margin-top: 15px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["editprofileerror"]
+                            </div>
+                            }
+                        }
+                        
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>First Name <span>*</span></label>
+
+                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @placeholder = "Enter First Name* ", @required = "true", @maxlength = "15" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.FirstName)</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Last Name <span>*</span></label>
+                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @placeholder = "Enter Last Name * ", @required = "true" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.LastName)</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Email <span>*</span></label>
+                                    @Html.TextBoxFor(model => model.EmailId, new { @class = "form-control", @placeholder = "Enter Email Id * ", @required = "true", @maxlength = "15" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.EmailId)</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Contact <span>*</span></label>
+                                    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @placeholder = "Enter Phone * ", @required = "true" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.Phone)</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                <input type="submit" value="Update">
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+<script>
+    function checkFileExtension(elem) {
+        var filePath = elem.value;
+
+        if (filePath.indexOf('.') == -1)
+            return false;
+
+        var validExtensions = new Array();
+        var ext = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
+
+        validExtensions[0] = 'jpg';
+        validExtensions[1] = 'jpeg';
+        validExtensions[2] = 'bmp';
+        validExtensions[3] = 'png';
+
+        for (var i = 0; i < validExtensions.length; i++) {
+            if (ext == validExtensions[i])
+                return true;
+        }
+
+
+        alert('The file extension ' + ext.toUpperCase() + ' is not allowed!');
+        elem.value = null;
+        return false;
+    }
+
+    function showMyImage(fileInput) {
+
+        if (checkFileExtension(fileInput) == true) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+                var img = document.getElementById("thumbnil");
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function (aImg) {
+                    return function (e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+</script>

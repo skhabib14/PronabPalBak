@@ -1,0 +1,217 @@
+﻿@model PronabPal.Models.SpotModel
+@using System.Data;
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutAfterDashboardView.cshtml";
+
+    long TotalPage = (long)ViewBag.TotalPage;
+    long CurrPage = (long)ViewBag.CurrentPage;
+    DataSet ds = (DataSet)ViewBag.FlowListDb;
+    DataTable dt = new DataTable();
+    if (ds != null && ds.Tables[0].Rows.Count > 0)
+    {
+        dt = ds.Tables[0];
+    }
+}
+
+<style>
+    .table-bordered {
+        border: 1px solid #fff;
+    }
+
+        .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td,
+        .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+            border: 1px solid #ffffff;
+        }
+</style>
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+
+<div class="row">
+    <div class="col-sm-12 col-xs-12">
+        @if (TempData.Count > 0)
+        {
+            if (!string.IsNullOrEmpty((string)TempData["FlowSucess"]))
+            {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check alert-icon"></i>
+                <strong>Success!</strong> @TempData["FlowSucess"]
+            </div>
+            }
+
+            if (!string.IsNullOrEmpty((string)TempData["FlowUptSucess"]))
+            {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check alert-icon"></i>
+                <strong>Success!</strong> @TempData["FlowUptSucess"]
+            </div>
+            }
+
+            if (!string.IsNullOrEmpty((string)TempData["DeleteFlow"]))
+            {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check alert-icon"></i>
+                <strong>Success!</strong> @TempData["DeleteFlow"]
+            </div>
+            }
+
+            if (TempData["error"] != null && !string.IsNullOrWhiteSpace(TempData["error"].ToString()))
+            {
+            <div class="alert alert-danger fade in" style="margin-top: 15px;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["error"]
+            </div>
+            }
+        }
+
+        <div class="user-edit">
+
+            <div class="col-md-12 text-center">
+                <h2 style="margin: 0; text-align: center;"><span>Flow List</span></h2>
+            </div>
+
+            @if (dt.Rows.Count > 0)
+            {
+                foreach (System.Data.DataRow dr in dt.Rows)
+                {
+                <div class="col-md-4 mt10 nopadd">
+                    <div class="flowbox">
+                        <a href="@Url.Action("Index", "flow", new { id = @dr["Dictum_ID"].ToString() })">
+                            <h4 class="text-center">@(dr["Phrase"].ToString().Replace("-", " ").Replace("_", " ") != "" ? dr["Phrase"].ToString().Replace("-", " ").Replace("_", " ") : "")</h4>
+                        </a>
+                        <p>
+                            @(dr["Description"].ToString() != "" ? dr["Description"].ToString() : "")
+                        </p>
+                        <div class="flowbottom">
+                            <span class="col-md-4 nopadd text-center"><a href="@Url.Action("edit", "flow", new { id = @dr["Dictum_ID"].ToString() })" class="editbtn">Edit</a></span>
+                            <span class="col-md-4 nopadd text-center"><a href="javascript:void(0);" onclick="GetSpotList('@dr["Dictum_ID"].ToString()')" class="addbtn">Add Spot</a></span>
+                            <span class="col-md-4 nopadd text-center"><a onclick="return ConfirmationDelete()" href="@Url.Action("delete", "flow", new { id = @dr["Dictum_ID"].ToString() })" class="delbtn">Delete</a></span>
+                        </div>
+                    </div>
+                </div>
+                }
+                
+            <div class="col-md-12 text-center">
+                <div class="pagination-container">
+                    @if (TotalPage > 1)
+                    {              
+                        <div class="span6">
+                            <div class="dataTables_paginate paging_bootstrap pagination">
+
+                                <ul class="pagination">
+                                    @if (CurrPage > 1)
+                                    {
+                                        <li><a href="@Url.Action("list", "flow", new { @Search = ViewBag.Search, @page = (CurrPage - 1) })"><i class="fa fa-fast-backward"></i></a></li>                                                          
+                                    }
+                                    @for (int i = 1; i <= TotalPage; i++)
+                                    {
+                                        if (i == CurrPage)
+                                        {
+                                        <li class="active"><a href="#">@i</a></li>                                                            
+                                        }
+                                        else
+                                        {
+                                        <li><a href="@Url.Action("list", "flow", new { @Search = ViewBag.Search, @page = i })">@i</a></li>                                                          
+                                        }
+                                    }
+                                    @if (CurrPage < TotalPage)
+                                    {
+                                        <li><a href="@Url.Action("list", "flow", new { @Search = ViewBag.Search, @page = (CurrPage + 1) })"><i class="fa fa-fast-forward"></i></a></li>                                                   
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            }
+            else
+            {
+                <h4 class="panel-title alert alert-info fade in" style="color: #F10404; text-align: center; margin-top: 25px;">No result found.</h4>
+            }
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modelcontent">
+        </div>
+    </div>
+</div>
+
+    
+<script type="text/javascript">
+
+    function GetSpotList(DictumId) {
+        $('#loader').show();
+        $.ajax({
+            url: '@Url.Action("GetSpotList", "flow")',
+            type: 'POST',
+            data: { DictumId: DictumId },
+            success: function (data) {
+                $("#modelcontent").html(data);
+                $('#myModal').modal('show');
+                $('#loader').hide();
+            },
+            error: function (req, status, error) {
+                //  alert("R: " + req + " S: " + status + " E: " + error);
+                //$('#loader').hide();
+            },
+        });
+    }
+
+
+    function SearchSpot() {
+        var SearchId = $('#SearchId').val();
+        var DictumId = $('#DictumId').val();
+        $('#loader').show();
+        $.ajax({
+            url: '@Url.Action("GetSpotList", "flow")',
+            type: 'POST',
+            data: { DictumId: DictumId, Search: SearchId },
+            success: function (data) {
+                $('#modelcontent').html(data);
+                $('#myModal').modal({ show: true });
+                $('#loader').hide();
+            },
+            error: function (req, status, error) {
+            },
+        });
+    }
+
+
+    function AddSpotInFlow(SpotId) {
+       
+        var DictumId = $('#DictumId').val();
+        $('#loader').show();
+        $.ajax({
+            url: '@Url.Action("addspotinflow", "flow")',
+            type: 'POST',
+            data: { DictumId: DictumId, SpotId: SpotId },
+            success: function (data) {
+                $('#modelcontent').html(data);
+                $('#myModal').modal({ show: true });
+                $('#loader').hide();
+            },
+            error: function (req, status, error) {
+            },
+        });
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    function ConfirmationDelete() {
+        if (confirm("Do you want to delete") == false) {
+            return false;
+        }
+    }
+</script>

@@ -1,0 +1,64 @@
+﻿@model PronabPal.Models.FlowModel
+@{
+    ViewBag.Title = "add Dictum";
+    Layout = "~/Views/Shared/_LayoutAfterDashboardView.cshtml";
+}
+
+<div class="row">
+
+    <h2 style="margin: 0; text-align: center;"><span>Add Flow</span></h2>
+
+    <div class="col-sm-12 col-xs-12">
+
+        @using (Html.BeginForm("add", "flow", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="spot-details-message">
+                @if (TempData.Count > 0)
+                {
+                    if (TempData["error"] != null && !string.IsNullOrWhiteSpace(TempData["error"].ToString()))
+                    {
+                    <div class="alert alert-danger fade in" style="margin-top: 15px;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <i class="glyphicon glyphicon-ban-circle alert-icon"></i><strong>Oh snap!</strong> @TempData["error"]
+                    </div>
+                    }
+                }
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label>Flow Title <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(model => model.Phrase, new { @class = "form-control", @placeholder = "Enter Flow Title* ", @required = "true" })
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.Phrase)</span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label>Flow Description </label>
+                                    @Html.TextAreaFor(model => model.Description, new { @rows = "8", @class = "form-control", @placeholder = "Enter Flow Description "})
+                                    <span style="color: red">@Html.ValidationMessageFor(model => model.Description)</span>
+                                </div>
+                            </div>
+                                                        
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+                                    <input type="submit" value="Submit">
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <a href="@Url.Action("list", "flow")" class="btn btn-danger ml10">Cancel</a>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+

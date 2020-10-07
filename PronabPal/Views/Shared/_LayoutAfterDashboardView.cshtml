@@ -1,0 +1,305 @@
+﻿@using System.Data;
+@{
+    Classes.DataLayerFunctions dl = new Classes.DataLayerFunctions();
+
+    HttpCookie PronabPal_login_Cookies = Request.Cookies["PronabPal_login_Cookies"];
+    DataTable dtfetchuserp = new DataTable();
+    string uidd = "", utype = "";
+    if (PronabPal_login_Cookies != null)
+    {
+        uidd = PronabPal_login_Cookies["UserId"].ToString();
+        utype = PronabPal_login_Cookies["UserType"].ToString();
+        dtfetchuserp = dl.Inline_Process("select UserId,UserName,EmailId,ProfileImage  from [dbo].[Login_tbl] where UserId='" + uidd + "'").Tables[0];
+    }
+    else
+    {
+        Response.Redirect(Url.Action("signin", "account"));
+    }
+
+    DataSet ds4 = dl.Inline_Process("select * from Social_tbl");
+    if (ds4 != null && ds4.Tables[0].Rows.Count > 0)
+    {
+        ViewBag.Facebook = ds4.Tables[0].Rows[0]["Facebook"].ToString() != "" ? ds4.Tables[0].Rows[0]["Facebook"].ToString() : "";
+        ViewBag.Twitter = ds4.Tables[0].Rows[0]["Twitter"].ToString() != "" ? ds4.Tables[0].Rows[0]["Twitter"].ToString() : "";
+        ViewBag.Instagram = ds4.Tables[0].Rows[0]["Instagram"].ToString() != "" ? ds4.Tables[0].Rows[0]["Instagram"].ToString() : "";
+        ViewBag.Youtube = ds4.Tables[0].Rows[0]["Youtube"].ToString() != "" ? ds4.Tables[0].Rows[0]["Youtube"].ToString() : "";
+        //ViewBag.Address = ds4.Tables[0].Rows[0]["Address"].ToString() !="" ? ds4.Tables[0].Rows[0]["Address"].ToString() : "";
+        //ViewBag.Contact = ds4.Tables[0].Rows[0]["Contact"].ToString() !="" ? ds4.Tables[0].Rows[0]["Contact"].ToString() : "";
+        //ViewBag.Email = ds4.Tables[0].Rows[0]["Email"].ToString() !="" ? ds4.Tables[0].Rows[0]["Email"].ToString() : "";
+    }
+    
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Spot n Flow</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+    <link href="@Url.Content("~/Content/AfterHome/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/AfterHome/css/owl.theme.default.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/AfterHome/css/owl.carousel.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/AfterHome/css/fontawesome-all.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/AfterHome/css/style.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/AfterHome/css/responsive.css")" rel="stylesheet">
+
+
+    <link href="@Url.Content("~/Content/datetimepicker/jquery.datetimepicker.css")" rel="stylesheet">
+
+    <link href="@Url.Content("~/Content/AdminTheme/themes/Canvas/canvascss.css")" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div id="loader"></div>
+
+    <header>
+        <div class="head-main">
+            <div class="container">
+                <div class="logo-sec">
+                    <a href="@Url.Action("HomePage", "Home")">
+                        <img src="@Url.Content("~/Content/AfterHome/images/logo.png")"></a>
+                </div>
+                <div class="main-navigateion-menu">
+                    <nav class="navbar navbar-default">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="@Url.Action("HomePage", "Home")">Home</a></li>
+                                <li><a href="@Url.Action("Index", "spot")">Spot</a></li>
+                                <li><a href="#">Member</a></li>
+                                <li><a href="#">Research Category</a></li>
+                                <li><a href="#">Flow</a></li>
+                                <li><a href="#">About Us </a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i><span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("dashboard", "account")">Dashboard</a></li>
+                                        <li><a href="@Url.Action("EditProfile", "account")">Edit Profile</a></li>
+                                        <li><a href="@Url.Action("ChangePasswordUser", "account")">Change Password</a></li>
+                                        <li><a href="@Url.Action("logout", "account")">Log Out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        @*<div class="header-bottom">
+            <div class="container">
+                <div class="head-left-sec">
+
+                    <select class="form-control selectpicker">
+                        <option>Category</option>
+                        <option>select 1</option>
+                        <option>select 2</option>
+                    </select>
+
+
+                </div>
+                <div class="head-right-sec">
+                    <ul>
+                        <li>
+                            <input type="search" class="form-control" placeholder="Search"><input type="submit"></li>
+                        <li>
+                            <button class="follow-btn">Follows</button></li>
+                        <li>
+                            <button class="tag-btn">Tags</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+    </header>
+
+    <section class="dash-sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+
+                    @Html.Partial("_user_navigation")
+
+                    @*<ul class="side-menu">
+                        <li><a href="@Url.Action("dashboard", "Account")">Dashboard</a></li>
+                        <li><a href="@Url.Action("EditProfile", "account")">Edit Profile</a></li>
+                        <li><a href="@Url.Action("ChangePasswordUser", "account")">Change Password</a></li>
+                        
+                        <li><a href="@Url.Action("add", "flow")">Add Flow</a></li>
+                        <li><a href="@Url.Action("list", "flow")">Flow List</a></li>
+                        
+                        <li><a href="@Url.Action("add", "spot")">Add Spot</a></li>
+                        <li><a href="@Url.Action("list", "spot")">Spot List</a></li>
+
+                    </ul>*@
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    @RenderBody()
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="col-md-3">
+                    <h2>Contact information</h2>
+                    <p>simply dummy text </p>
+                    @*<p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26372472.329392266!2d-113.73907545808905!3d36.20800122385797!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1517468015727" width="100%" height="140" frameborder="0" style="border:0" allowfullscreen></iframe></p>*@
+                    <p>@Html.Raw(ViewBag.Map)</p>
+                </div>
+                <div class="col-md-3">
+                    <h2>Latest News</h2>
+                    <p><a href="">Pronab Pal Space August 2017</a></p>
+                    <p><a href="">Pronab Pal Space August 2017</a></p>
+                    <p><a href="">Pronab Pal Space August 2017</a></p>
+                </div>
+                <div class="col-md-3">
+                    <h2>Important Links</h2>
+                    <ul class="footer-menu">
+                        <li><a href="@Url.Action("spot", "Home")">Spot</a></li>
+                        <li><a href="@Url.Action("signin", "Account")">Member </a></li>
+                        <li><a href="">Research Category</a></li>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h2>Newsletter</h2>
+                    <p>Subscribe to our newsletter and stay up to date with the latest news and events! </p>
+                    <div class="footer-newsletter">
+                        <form>
+                            <input type="text" placeholder="Enter Your Email">
+                            <input type="submit" value="GO">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <p>Website Developed by: <a href="https://www.goigi.com/" target="_blank">GOIGI.COM</a></p>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                        <p><i class="far fa-copyright"></i>Pronab Pal Space</p>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <ul class="social-share-footer">
+                            <li><a href="@ViewBag.Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="@ViewBag.Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="@ViewBag.Instagram" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="@ViewBag.Youtube" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" data-toggle="tooltip" data-placement="left">
+        <i class="fas fa-angle-double-up"></i></a>
+
+
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/Canvas/jquery-latest.js")"></script>
+    <script src="@Url.Content("~/Content/Home/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Content/AfterHome/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/AfterHome/js/owl.carousel.min.js")"></script>
+    <script src="@Url.Content("~/Content/AfterHome/js/custom.js")"></script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/Canvas/sketch.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#simple_sketch').sketch({ defaultColor: "#000" });
+        });
+        // Clear the canvas context using the canvas width and height
+        function clearCanvas(canvas, ctx) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+
+    <script>
+        function CheckCanvas() {
+            var Pic = document.getElementById('simple_sketch').toDataURL("image/png");
+            Pic = Pic.replace('data:image/png;base64,', '');
+            if (Pic == "") {
+                alert("Please provide signature first.");
+            }
+            else {
+                var signatureData = Pic;
+                document.getElementById("CanvasSketch").value = signatureData;
+            }
+        };
+    </script>
+
+    <script src="@Url.Content("~/Content/datetimepicker/jquery.datetimepicker.js")"></script>
+    <script type="text/javascript">
+        var CurDate = Date();
+        $('.datetimepicker3').datetimepicker({
+            //yearOffset:222,
+            lang: 'en',
+            timepicker: false,
+            format: 'd M Y',
+            formatDate: 'Y/m/d',
+            minDate: CurDate // yesterday is minimum date
+            //maxDate: CurDate//'+2016/01/02' // and tommorow is maximum date calendar
+        });
+    </script>
+
+    <script src="@Url.Content("~/Content/AdminTheme/themes/supr/js/ckeditor/ckeditor.js")"></script>
+    <script type="text/javascript">
+        CKEDITOR.editorConfig = function (config) {
+            config.language = 'es';
+            config.uiColor = '#F7B42C';
+            config.height = 300;
+            config.toolbarCanCollapse = true;
+            allowedContent: true;
+            CKEDITOR.dtd.$removeEmpty['i'] = false;
+        };
+        CKEDITOR.replace('editor');
+    </script>
+
+
+    @*<script type="text/javascript">
+        $(function () {
+            $('#Spotsimple_sketch').sketch({ defaultColor: "#000" });
+        });
+
+        // Clear the canvas context using the canvas width and height
+        function clearCanvas(canvas, ctx) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+    
+<script>
+    function SpotCheckCanvas() {
+        var Pic = document.getElementById('Spotsimple_sketch').toDataURL("image/png");
+        Pic = Pic.replace('data:image/png;base64,', '');
+        if (Pic == "") {
+            alert("Please provide signature first.");
+        }
+        else {
+            var signatureData = Pic;
+            document.getElementById("SpotCanvasSketch").value = signatureData;
+        }
+    };
+</script>*@
+
+
+</body>
+</html>
